@@ -1,21 +1,13 @@
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
 </head>
 <body>
-{% if data=instructors %}
-<section class="instructors_extended_info">
-<div class="slider__slide swiper-slide">
-                            <div class="slider__slide-img-wrapper">
-                                <img src="{{instructor.image.url}}" alt="instructor" class="img slider__slide-img" width="500" height="300">
-                            </div>
-                            <h3 class="slider__slide-title"><a href="http://127.0.0.1:8000/">{{instructor.title}}</a></h3>
-                            <p class="slider__slide-desc">{{extended_description}}</p>
-</div>
-</section>
-
 <section class="courses_extended_info">
 <div class="slider__slide swiper-slide">
                            <div class="courses__card card">

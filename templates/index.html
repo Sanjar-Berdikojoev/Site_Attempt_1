@@ -174,7 +174,7 @@
                             <div class="slider__slide-img-wrapper">
                                 <img src="{{i.image.url}}" alt="instructor" class="img slider__slide-img">
                             </div>
-                            <h3 class="slider__slide-title">{{i.title}}</h3>
+                            <h3 class="slider__slide-title"><a href="{{i.id}}">{{i.title}}</a></h3>
                             <p class="slider__slide-desc">{{i.description}}</p>
                         </div>
                         {% endfor %}
@@ -255,8 +255,8 @@
                             </div>
                         </div>
                         <div class="card__general">
-                            <h3 class="card__title">{{j.title}}</h3>
-                            <p class="card__text">{{j.description}}</p>
+                            <h3 class="card__title">{{i.title}}</h3>
+                            <p class="card__text">{{i.description}}</p>
                             <span class="card__more">Mouse over the card for more info</span>
                         </div>
                     </div>

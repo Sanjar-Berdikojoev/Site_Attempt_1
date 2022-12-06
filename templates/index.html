@@ -40,17 +40,31 @@
                                         <a href="pages/instructors.html" class="navbar__link">Instructors</a>
                                     </li>
                                     <li class="navbar__item">
-                                        <a href="pages/contacts.html" class="navbar__link">Contacts</a>
-                                    </li>
-                                    <li class="navbar__item">
                                         <a href="pages/blog.html" class="navbar__link">Blog</a>
                                     </li>
                                     <li class="navbar__item">
                                         <a href="pages/faqs.html" class="navbar__link">FAQs</a>
                                     </li>
                                     <li class="navbar__item">
-                                        <a href="pages/register.html" class="navbar__link">Register</a>
+                                        <a href="pages/contacts.html" class="navbar__link">Contacts</a>
                                     </li>
+                                    <li class="navbar__item">
+                                        <a class="navbar__link" href="/registration/">Register</a>
+                                    </li>
+{% if request.user.is_superuser %}
+<!--                                    <li class="navbar__item">-->
+<!--                                        <a href="pages/contacts.html" class="navbar__link">Contacts</a>-->
+<!--                                    </li>-->
+                                        {% endif %}
+                                    {% if request.user.is_authenticated%}
+       <li class="navbar__item">
+                                        <a class="navbar__link" href="/logout/">Logout</a>
+                                    </li>
+        {% else %}
+       <li class="navbar__item">
+                                        <a class="navbar__link" href="/login/">Login</a>
+                                    </li>
+        {% endif %}
                                 </ul>
                             </nav>
                         </div>
@@ -174,7 +188,7 @@
                             <div class="slider__slide-img-wrapper">
                                 <img src="{{i.image.url}}" alt="instructor" class="img slider__slide-img">
                             </div>
-                            <h3 class="slider__slide-title">{{i.title}}</h3>
+                            <h3 class="slider__slide-title"><a href="{{i.id}}">{{i.title}}</a></h3>
                             <p class="slider__slide-desc">{{i.description}}</p>
                         </div>
                         {% endfor %}
@@ -251,7 +265,7 @@
                                         <span class="card__info-value">{{j.lessons}}</span>
                                     </div>
                                 </div>
-                                <a href="#" class="card__link">View course</a>
+                                <a href="{{j.id}}" class="card__link">View course</a>
                             </div>
                         </div>
                         <div class="card__general">

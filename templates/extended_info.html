@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+{% if data=instructors %}
+<section class="instructors_extended_info">
+<div class="slider__slide swiper-slide">
+                            <div class="slider__slide-img-wrapper">
+                                <img src="{{instructor.image.url}}" alt="instructor" class="img slider__slide-img" width="500" height="300">
+                            </div>
+                            <h3 class="slider__slide-title"><a href="http://127.0.0.1:8000/">{{instructor.title}}</a></h3>
+                            <p class="slider__slide-desc">{{extended_description}}</p>
+</div>
+</section>
+
+<section class="courses_extended_info">
+<div class="slider__slide swiper-slide">
+                           <div class="courses__card card">
+                        <div class="card__additional">
+                            <div class="card__car-card">
+                                <div class="card__img-wrapper">
+                                    <img src="{{course.image.url}}" alt="card-img" class="card__img">
+                                </div>
+                            </div>
+                            <div class="card__more-info">
+                                <h3 class="card__title">{{course.title}}</h3>
+                                <div class="card__infos">
+                                    <div class="card__info">
+                                        <span class="card__info-name">Price</span>
+                                        <span class="card__info-value">{{course.price}} KGS</span>
+                                    </div>
+                                    <div class="card__info">
+                                        <span class="card__info-name">Course duration</span>
+                                        <span class="card__info-value">{{course.duration}} week</span>
+                                    </div>
+                                    <div class="card__info">
+                                        <span class="card__info-name">Number of practical lessons</span>
+                                        <span class="card__info-value">{{course.lessons}}</span>
+                                    </div>
+                                </div>
+                                <a href="#" class="card__link">View course</a>
+                            </div>
+                        </div>
+                        <div class="card__general">
+                            <h3 class="card__title">{{course.title}}</h3>
+                            <p class="card__text">{{extended_description}}</p>
+                            <span class="card__more">Mouse over the card for more info</span>
+                        </div>
+                    </div>
+</div>
+</section>
+</body>
+</html>

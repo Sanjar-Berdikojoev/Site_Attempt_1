@@ -17,7 +17,16 @@ def mainpage_all(request):
 
 def extended_info(request, id):
     instructor = models.Instructor.objects.get(id=id)
-    return render(request, 'instructors_more.html', {'instructor': instructor})
+    course = models.Course.objects.get(id=id)
+    blogs = models.Blog.objects.get(id=id)
+    traffic_laws = models.Traffic_Law.objects.get(id=id)
+    context = {
+        'instructor': instructor,
+        'course': course,
+        'blogs': blogs,
+        'traffic_laws': traffic_laws,
+    }
+    return render(request, 'extended_info.html', context)
 # def courses(request):
 #     course = models.Course.objects.all()
 #     return render(request, 'index.html', {'course': course})

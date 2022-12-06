@@ -52,9 +52,9 @@
                                         <a class="navbar__link" href="/registration/">Register</a>
                                     </li>
 {% if request.user.is_superuser %}
-<!--                                    <li class="navbar__item">-->
-<!--                                        <a href="pages/contacts.html" class="navbar__link">Contacts</a>-->
-<!--                                    </li>-->
+                                    <li class="navbar__item">
+                                      <a class="add_instructor_button" href="/instructor/create">Add Instructor</a>
+                                    </li>
                                         {% endif %}
                                     {% if request.user.is_authenticated%}
        <li class="navbar__item">
@@ -188,8 +188,16 @@
                             <div class="slider__slide-img-wrapper">
                                 <img src="{{i.image.url}}" alt="instructor" class="img slider__slide-img">
                             </div>
-                            <h3 class="slider__slide-title"><a href="{{i.id}}">{{i.title}}</a></h3>
+                            <h3 class="slider__slide-title"><a href="{{i.id}}/instructor">{{i.title}}</a></h3>
                             <p class="slider__slide-desc">{{i.description}}</p>
+                            {% if request.user.is_superuser %}
+                                    <a class="navbar__item">
+                                      <a class="update_instructor_button" href="instructor/{{i.id}}/update">Update</a>
+                                    </a>
+                                    <a class="navbar__item">
+                                      <a class="delete_instructor_button" href="instructor/{{i.id}}/delete">Delete</a>
+                                    </a>
+                                        {% endif %}
                         </div>
                         {% endfor %}
 <!--                        <div class="slider__slide swiper-slide">-->
@@ -265,7 +273,7 @@
                                         <span class="card__info-value">{{j.lessons}}</span>
                                     </div>
                                 </div>
-                                <a href="{{j.id}}" class="card__link">View course</a>
+                                <a href="{{j.id}}/course" class="card__link">View course</a>
                             </div>
                         </div>
                         <div class="card__general">
@@ -326,7 +334,7 @@
                         <h4 class="blog__slide-title">{{k.title}}</h4>
                         <p class="blog__slide-text">{{k.description}}</p>
                         <div class="info">
-                            <a href="#" class="blog__slide-link">Read more</a>
+                            <a href="{{k.id}}/blog" class="blog__slide-link">Read more</a>
                             <span class="blog__slide-date">{{k.created_date}}</span>
                         </div>
                     </div>
@@ -413,7 +421,7 @@
                         <figcaption class="card__caption">
                           <h2 class="card__title">{{x.title}}</h2>
                           <p class="card__snippet">{{x.description}}</p>
-                          <a href="#" class="card__button">Read more</a>
+                          <a href="{{x.id}}/traffic_law" class="card__button">Read more</a>
                         </figcaption>
                     </figure>
                 </div>

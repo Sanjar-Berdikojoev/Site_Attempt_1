@@ -3,13 +3,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Course More Info</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <link rel="stylesheet" href="{% static 'css/reset.css' %}">
 </head>
 <body>
-<section class="courses_extended_info">
-<div class="slider__slide swiper-slide">
+ <section class="courses">
+        <div class="container">
+            <h2 class="courses__title">Our courses</h2>
+            <div class="courses__inner">
+                <div class="courses__info">
+                    <p class="courses__text">
+                        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id saepe accusamus, tenetur laboriosam architecto soluta temporibus eaque voluptas. Ipsam quo laboriosam distinctio facere, placeat atque illo quod. Cupiditate dolores hic vitae, amet modi quas numquam! Soluta voluptatem consectetur et, ducimus quisquam harum ad nihil sit rerum optio eius explicabo enim, quidem molestias magni aut doloribus. Ipsam iusto ipsum adipisci reprehenderit magnam eaque blanditiis, at omnis rem mollitia quae tempore eveniet sed aut molestias dolor cumque nulla optio beatae. Asperiores earum praesentium ipsa cupiditate ea dolor ex rerum assumenda cum blanditiis minus itaque quasi, fugit explicabo facilis sed. Incidunt, iure quidem!
+                    </p>
+                    <button class="courses__info-button">
+                        <a href="pages/courses.html" class="courses__info-link">View all</a>
+                    </button>
+                </div>
+
+                <div class="courses__wrapper">
+                    <section class="courses_extended_info">
+                        <div class="slider__slide swiper-slide">
                            <div class="courses__card card">
                         <div class="card__additional">
                             <div class="card__car-card">
@@ -41,8 +55,12 @@
                             <p class="card__text">{{extended_description}}</p>
                             <span class="card__more">Mouse over the card for more info</span>
                         </div>
-                    </div>
-</div>
-</section>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
 </html>

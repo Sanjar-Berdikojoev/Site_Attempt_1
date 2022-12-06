@@ -3,13 +3,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Traffic Laws More Info</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <link rel="stylesheet" href="{% static 'css/reset.css' %}">
 </head>
 <body>
-<section>
-    <div class="traffic-laws__card card">
+<section class="traffic-laws">
+        <div class="container">
+            <h2 class="traffic-laws__title">Traffic laws</h2>
+            <div class="traffic-laws__inner">
+                <section>
+                    <div class="traffic-laws__card card">
                     <figure class="card__thumb">
                         <img src="{{traffic_laws.image.url}}" alt="Picture by Daniel Lincoln" class="card__image">
                         <figcaption class="card__caption">
@@ -17,7 +21,11 @@
                           <p class="card__snippet">{{extended_description}}</p>
                         </figcaption>
                     </figure>
-    </div>
+                     </div>
+                </section>
+            </div>
+            <a href="./pages/traffic_laws.html" class="traffic-laws__link">View all</a>
+        </div>
 </section>
 </body>
 </html>

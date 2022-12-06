@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update Instructor</title>
+</head>
+<body>
+<div class="form" id="form">
+         <form action="" method="post" enctype="multipart/form-data">
+             <h1 class="instructor_update_title">Update Instructor</h1>
+             {% csrf_token %}
+             {{form.as_p}}
+             <input type="submit" value="update">
+         </form>
+</div>
+</body>
+</html>

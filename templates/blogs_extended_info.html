@@ -3,13 +3,18 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Blog More Info</title>
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <link rel="stylesheet" href="{% static 'css/reset.css' %}">
 </head>
 <body>
-<section class="blogs_extended_info">
-<div class="blog__slide swiper-slide">
+<section class="blog">
+        <div class="container">
+            <h2 class="blog__title">Blog</h2>
+            <div class="blog__slider swiper mySwiper2">
+                <div class="blog__slider-wrapper swiper-wrapper">
+                <section class="blogs_extended_info">
+                    <div class="blog__slide swiper-slide">
                     <img src="{{blogs.image.url}}" alt="slide img" class="blog__slide-img">
                     <div class="blog__slide-content">
                         <h4 class="blog__slide-title">{{blogs.title}}</h4>
@@ -18,7 +23,12 @@
                             <span class="blog__slide-date">{{blogs.created_date}}</span>
                         </div>
                     </div>
-</div>
-</section>
+                    </div>
+                </section>
+                </div>
+            </div>
+            <a href="./pages/blog.html" class="blog__link">View all</a>
+        </div>
+    </section>
 </body>
 </html>

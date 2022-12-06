@@ -3,21 +3,17 @@ from . import models
 from django import forms
 
 ADMIN = 1
-VipClient = 2
-Client = 3
+Client = 2
 USER_TYPE = (
     (ADMIN, 'ADMIN'),
-    (VipClient, "VipClient"),
     (Client, 'Client')
 )
 
 MALE = 1
 FEMALE = 2
-OTHER = 3
 GENDER_TYPE = (
     (MALE, 'MALE'),
     (FEMALE, "FEMALE"),
-    (OTHER, 'OTHER')
 )
 
 class RegistrationForm(UserCreationForm):

@@ -7,21 +7,17 @@ class CustomUser(User):
         verbose_name_plural='Users'
 
     ADMIN = 1
-    VipClient = 2
-    Client = 3
+    Client = 2
     USER_TYPE = (
         (ADMIN, 'ADMIN'),
-        (VipClient, "VipClient"),
         (Client, 'Client')
     )
 
     MALE = 1
     FEMALE = 2
-    OTHER = 3
     GENDER_TYPE = (
         (MALE, 'MALE'),
         (FEMALE, "FEMALE"),
-        (OTHER, 'OTHER')
     )
 
     user_type = models.IntegerField(choices=USER_TYPE, verbose_name='Тип Пользователя', default=Client)

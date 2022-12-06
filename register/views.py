@@ -1,21 +1,16 @@
-from django.shortcuts import render
-from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.views import LoginView
 from django.urls import reverse
 from django.views.generic import CreateView, ListView
 from django.shortcuts import render, redirect
-from . import models
-from . import forms
 from django.contrib.auth.models import User
-from django.contrib.auth.forms import UserCreationForm
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
 class Registration(CreateView):
     form_class = UserCreationForm
-    success_url = '/ter/'
+    success_url = 'http://127.0.0.1:8000/'
     template_name = 'registration.html'
 
 

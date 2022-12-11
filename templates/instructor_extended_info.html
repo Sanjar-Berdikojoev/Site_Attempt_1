@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Instructor More Info</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic" rel="stylesheet" />
     <link rel="stylesheet" href="{% static 'css/main.css' %}">
     <link rel="stylesheet" href="{% static 'css/reset.css' %}">
 </head>
@@ -20,7 +21,15 @@
                                 <img src="{{instructor.image.url}}" alt="instructor" class="img slider__slide-img" width="500" height="300">
                             </div>
                             <h3 class="slider__slide-title"><a href="http://127.0.0.1:8000/">{{instructor.title}}</a></h3>
-                            <p class="slider__slide-desc">{{extended_description}}</p>
+                            <p class="slider__slide-desc">{{instructor.extended_description}}</p>
+                                {% if request.user.is_superuser %}
+                                    <a class="navbar__item">
+                                      <a class="update_instructor_button" href="instructor/{{i.id}}/update">Update</a>
+                                    </a>
+                                    <a class="navbar__item">
+                                      <a class="delete_instructor_button" href="instructor/{{i.id}}/delete">Delete</a>
+                                    </a>
+                                        {% endif %}
                             </div>
                         </section>
                     </div>
@@ -28,5 +37,20 @@
             </div>
         </div>
     </section>
+
+<section class="instructor_reviews">
+         <div class="container">
+             {% for f in instructor_review %}
+             <div class="instructors_comment">
+                <a class="comment">{{f.post}}</a>
+                <a class="comment">{{f.name}}</a>
+                 <a class="comment">{{f.rating_choices}}</a>
+                 <a class="comment">{{f.comment}}</a>
+                 <a class="comment">{{f.created_date}}</a>
+                 <a class="comment">{{f.updated_date}}</a>
+             </div>
+             {% endfor %}
+         </div>
+</section>
 </body>
 </html>

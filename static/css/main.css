@@ -968,11 +968,6 @@ body {
 .socials__link svg:hover path {
   fill: #00ff11;
 }
-#ter {
-    display:flex;
-    flex-wrap:wrap;
-    max-width: 1800px;
-    margin: 0 auto;
-    padding:100px 0;
-    justify-content:center;
+.comment {
+  text-color: white;
 }

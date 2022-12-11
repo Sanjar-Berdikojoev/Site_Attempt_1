@@ -19,3 +19,13 @@ class Traffic_LawForm(forms.ModelForm):
     class Meta:
         model = models.Traffic_Law
         fields = '__all__'
+
+class Frequently_Asked_QuestionsForm(forms.ModelForm):
+    class Meta:
+        model = models.Frequently_Asked_Questions
+        fields = '__all__'
+
+class AdvantagesForm(forms.ModelForm):
+    class Meta:
+        model = models.Advantages
+        fields = '__all__'

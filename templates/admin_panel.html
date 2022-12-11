@@ -51,12 +51,8 @@
                                     <li class="navbar__item">
                                         <a class="navbar__link" href="/registration/">Register</a>
                                     </li>
-{% if request.user.is_superuser %}
                                     <li class="navbar__item">
-                                      <a class="admin_panel_button" href="/admin_panel">Admin Panel</a>
-                                    </li>
 
-                                        {% endif %}
                                     {% if request.user.is_authenticated%}
        <li class="navbar__item">
                                         <a class="navbar__link" href="/logout/">Logout</a>
@@ -76,50 +72,10 @@
             <div class="header__main-inner swiper-wrapper">
                 <div class="swiper-slide">
                         <div class="header__main-content">
-                            <h1 class="header__main-title" data-swiper-parallax="-300">First Class Driving School</h1>
-                            <p class="header__main-desc" data-swiper-parallax="-200">
-                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde velit, corporis nam ad provident doloremque corrupti temporibus eius asperiores error earum voluptatibus mollitia illo harum minus, dicta deleniti recusandae, officiis nobis perspiciatis.
-                            </p>
+                            <h1 class="header__main-title" data-swiper-parallax="-300">Admin Panel</h1>
                         </div>
-                </div>               
-                <div class="swiper-slide">
-                        <div class="header__main-content">
-                            <h1 class="header__main-title" data-swiper-parallax="-300">Why us?</h1>
-                            <p class="header__main-desc" data-swiper-parallax="-200">
-                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Adipisci sit distinctio, iure odio quia mollitia voluptatibus est animi vitae facilis harum quisquam voluptatum maiores. Rerum at eum totam dolor porro blanditiis consequatur est, sed nulla dolorem quod ad perferendis, corrupti repellat reiciendis velit modi possimus accusantium sequi et incidunt eligendi.
-                            </p>
-                        </div>
-                </div>                
-                <div class="swiper-slide">
-                        <div class="header__main-content">
-                            <h1 class="header__main-title" data-swiper-parallax="-300">Our politics</h1>
-                            <p class="header__main-desc" data-swiper-parallax="-200">
-                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde velit, corporis nam ad provident doloremque corrupti temporibus eius asperiores error earum voluptatibus mollitia illo harum minus, dicta deleniti recusandae, officiis nobis perspiciatis.
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus illum voluptate libero sed nam, at incidunt optio eaque ullam, non molestias distinctio corporis inventore quos cumque quidem possimus vel! Itaque qui impedit sequi, ipsum maxime illum architecto provident aspernatur hic.
-                            </p>
-                        </div>
-                </div>             
-                <div class="swiper-slide">
-                        <div class="header__main-content">
-                            <h1 class="header__main-title" data-swiper-parallax="-300">Our goals</h1>
-                            <p class="header__main-desc" data-swiper-parallax="-200">
-                                Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde velit, corporis nam ad provident doloremque corrupti temporibus eius asperiores error earum voluptatibus mollitia illo harum minus, dicta deleniti recusandae, officiis nobis perspiciatis.
-                                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Praesentium, a!
-                            </p>
-                        </div>
-                </div>             
-                <div class="swiper-slide">
-                        <div class="header__main-content">
-                            <h1 class="header__main-title" data-swiper-parallax="-300">Our achieves</h1>
-                            <p class="header__main-desc" data-swiper-parallax="-200">
-                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus illum voluptate libero sed nam, at incidunt optio eaque ullam, non molestias distinctio corporis inventore quos cumque quidem possimus vel! Itaque qui impedit sequi, ipsum maxime illum architecto provident aspernatur hic.
-                            </p>
-                        </div>
-                </div>            
+                </div>
             </div>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-pagination"></div>
         </div>
     </header>
 
@@ -127,6 +83,13 @@
         <div class="container">
             <div class="advantages__inner">
                 <h2 class="advantages__title">Our Advantages</h2>
+                                {% if request.user.is_superuser %}
+                <center>
+                                    <div class="model_creation_button">
+                                      <a class="add_model_button" href="/advantages/create">Add Advantage</a>
+                                    </div>
+                </center>
+                                        {% endif %}
                 <div class="advantages__cards">
                     {% for y in advantages %}
                     <div class="advantages__card pricing">
@@ -134,12 +97,20 @@
                             <div class="content">
                                 <img src="{{y.image.url}}" alt="card" class="advantages__card-img">
                                 <h3 class="advantages__card-title">{{y.title}}</h3>
+                                {% if request.user.is_superuser %}
+                                    <a class="navbar__item">
+                                      <a class="update_model_button" href="advantage/{{y.id}}/update">Update</a>
+                                    </a>
+                                    <a class="navbar__item">
+                                      <a class="delete_model_button" href="advantage/{{y.id}}/delete">Delete</a>
+                                    </a>
+                                        {% endif %}
                             </div>
                         </div>
                         <div class="advantages__card-face face2">
                             <div class="content">
                                 <p class="advantages__card-desc">{{y.description}}</p>
-                            </div> 
+                            </div>
                         </div>
                     </div>
                     {% endfor %}
@@ -152,6 +123,13 @@
         <div class="container">
             <div class="instructors__inner">
                 <h2 class="instructors__title">Our Instructors</h2>
+                {% if request.user.is_superuser %}
+                <center>
+                                    <div class="model_creation_button">
+                                      <a class="add_model_button" href="/instructor/create">Add Instructor</a>
+                                    </div>
+                </center>
+                                        {% endif %}
                 <div class="instructors__slider swiper mySwiper">
                     <div class="slider__wrapper swiper-wrapper">
                         {% for i in instructor %}
@@ -161,6 +139,14 @@
                             </div>
                             <h3 class="slider__slide-title"><a href="{{i.id}}/instructor">{{i.title}}</a></h3>
                             <p class="slider__slide-desc">{{i.description}}</p>
+                            {% if request.user.is_superuser %}
+                                    <a class="navbar__item">
+                                      <a class="update_model_button" href="instructor/{{i.id}}/update">Update</a>
+                                    </a>
+                                    <a class="navbar__item">
+                                      <a class="delete_model_button" href="instructor/{{i.id}}/delete">Delete</a>
+                                    </a>
+                                        {% endif %}
                         </div>
                         {% endfor %}
                     </div>
@@ -172,6 +158,13 @@
     <section class="courses">
         <div class="container">
             <h2 class="courses__title">Our courses</h2>
+            {% if request.user.is_superuser %}
+                <center>
+                                    <div class="model_creation_button">
+                                      <a class="add_model_button" href="/course/create">Add Course</a>
+                                    </div>
+                </center>
+                                        {% endif %}
             <div class="courses__inner">
                 <div class="courses__info">
                     <p class="courses__text">
@@ -207,6 +200,14 @@
                                         <span class="card__info-value">{{j.lessons}}</span>
                                     </div>
                                 </div>
+                                {% if request.user.is_superuser %}
+                                    <a class="navbar__item">
+                                      <a class="update_model_button" href="course/{{j.id}}/update">Update</a>
+                                    </a>
+                                    <a class="navbar__item">
+                                      <a class="delete_model_button" href="course/{{j.id}}/delete">Delete</a>
+                                    </a>
+                                        {% endif %}
                                 <a href="{{j.id}}/course" class="card__link">View course</a>
                             </div>
                         </div>
@@ -225,6 +226,13 @@
     <section class="blog">
         <div class="container">
             <h2 class="blog__title">Blog</h2>
+            {% if request.user.is_superuser %}
+                <center>
+                                    <div class="model_creation_button">
+                                      <a class="add_model_button" href="/blog/create">Add Blog</a>
+                                    </div>
+                </center>
+                                        {% endif %}
             <div class="blog__slider swiper mySwiper2">
                 <div class="blog__slider-wrapper swiper-wrapper">
                   {% for k in blogs %}
@@ -233,6 +241,14 @@
                     <div class="blog__slide-content">
                         <h4 class="blog__slide-title">{{k.title}}</h4>
                         <p class="blog__slide-text">{{k.description}}</p>
+                        {% if request.user.is_superuser %}
+                                    <a class="navbar__item">
+                                      <a class="update_model_button" href="blog/{{k.id}}/update">Update</a>
+                                    </a>
+                                    <a class="navbar__item">
+                                      <a class="delete_model_button" href="blog/{{k.id}}/delete">Delete</a>
+                                    </a>
+                                        {% endif %}
                         <div class="info">
                             <a href="{{k.id}}/blog" class="blog__slide-link">Read more</a>
                             <span class="blog__slide-date">{{k.created_date}}</span>
@@ -245,10 +261,17 @@
             <a href="./pages/blog.html" class="blog__link">View all</a>
         </div>
     </section>
-   
+
     <section class="traffic-laws">
         <div class="container">
             <h2 class="traffic-laws__title">Traffic laws</h2>
+            {% if request.user.is_superuser %}
+                <center>
+                                    <div class="model_creation_button">
+                                      <a class="add_model_button" href="/traffic_law/create">Add Traffic Law</a>
+                                    </div>
+                </center>
+                                        {% endif %}
             <div class="traffic-laws__inner">
                 {% for x in traffic_laws %}
                 <div class="traffic-laws__card card">
@@ -256,6 +279,14 @@
                         <img src="{{x.image.url}}" alt="Picture by Daniel Lincoln" class="card__image">
                         <figcaption class="card__caption">
                           <h2 class="card__title">{{x.title}}</h2>
+                            {% if request.user.is_superuser %}
+                                    <a class="navbar__item">
+                                      <a class="update_model_button" href="traffic_law/{{x.id}}/update">Update</a>
+                                    </a>
+                                    <a class="navbar__item">
+                                      <a class="delete_model_button" href="traffic_law/{{x.id}}/delete">Delete</a>
+                                    </a>
+                                        {% endif %}
                           <p class="card__snippet">{{x.description}}</p>
                           <a href="{{x.id}}/traffic_law" class="card__button">Read more</a>
                         </figcaption>
@@ -270,84 +301,38 @@
     <section class="faqs">
         <div class="container">
             <h2 class="faqs__title">FAQs</h2>
+            {% if request.user.is_superuser %}
+                <center>
+                                    <div class="model_creation_button">
+                                      <a class="add_model_button" href="/frequently_asked_questions/create">Add FAQ</a>
+                                    </div>
+                </center>
+                                        {% endif %}
             <div class="faqs__wrapper">
                 {% for z in frequently_asked_questions %}
                 <div class="faqs__faq faq">
                     <button class="faq__header">{{z.title}}</button>
                     <div class="faq__body">
                         <p class="faq__content">{{z.description}}</p>
+                        {% if request.user.is_superuser %}
+                                    <a class="navbar__item">
+                                      <a class="update_model_button" href="frequently_asked_questions/{{z.id}}/update">Update</a>
+                                    </a>
+                                    <a class="navbar__item">
+                                      <a class="delete_model_button" href="frequently_asked_questions/{{z.id}}/delete">Delete</a>
+                                    </a>
+                                        {% endif %}
                     </div>
                 </div>
                 {% endfor %}
-                </div> 
             </div>
-    </section>
- 
-    <footer class="footer">
-        <div class="container">
-            <div class="footer__inner">
-                <div class="footer__column">
-                    <a href="index.html" class="footer__logo logo">
-                        First Class
-                    </a>
-                </div>
-                <div class="footer__column">
-                    <h3 class="footer__column-title">Main links</h3>
-                    <a href="./pages/about_us.html" class="footer__column-link">about us</a>
-                    <a href="./pages/instructors.html" class="footer__column-link">instructors</a>
-                    <a href="./pages/courses.html" class="footer__column-link">courses</a>
-                    <a href="./pages/traffic_laws.html" class="footer__column-link">traffic laws</a>
-                </div>
-                <div class="footer__column">
-                    <h3 class="footer__column-title">Useful links</h3>
-                    <a href="#" class="footer__column-link">register</a>
-                    <a href="./pages/contacts.html" class="footer__column-link">contacts</a>
-                    <a href="./pages/blog.html" class="footer__column-link">blog</a>
-                    <a href="./pages/faqs.html" class="footer__column-link">FAQs</a>
-                </div>
-                <div class="footer__column socials">
-                    <h3 class="footer__column-title socials__ешеду">Follow us:</h3>
-                    <ul class="socials__list">
-                        <li class="socials__item">
-                            <a href="https://instagram.com" class="footer__column-link socials__link">
-                               <?xml version="1.0" encoding="utf-8"?>
-                                <!-- Uploaded to SVGRepo https://www.svgrepo.com -->
-                                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                                    viewBox="0 0 260 260" enable-background="new 0 0 260 260" xml:space="preserve">
-                                <path d="M164.58,64H95.42C78.1,64,64,78.1,64,95.42v69.16C64,181.9,78.1,196,95.42,196h69.16c17.32,0,31.42-14.1,31.42-31.42V95.42
-                                    C196,78.1,181.9,64,164.58,64z M130,171.1c-22.66,0-41.1-18.44-41.1-41.1s18.44-41.1,41.1-41.1s41.1,18.44,41.1,41.1
-                                    S152.66,171.1,130,171.1z M172.22,97.3c-5.3,0-9.6-4.3-9.6-9.61c0-5.3,4.3-9.6,9.6-9.6c5.31,0,9.61,4.3,9.61,9.6
-                                    C181.83,93,177.53,97.3,172.22,97.3z M130,102.9c-14.94,0-27.1,12.16-27.1,27.1s12.16,27.1,27.1,27.1s27.1-12.16,27.1-27.1
-                                    S144.94,102.9,130,102.9z M130,2C59.31,2,2,59.31,2,130s57.31,128,128,128s128-57.31,128-128S200.69,2,130,2z M210,164.58
-                                    c0,25.04-20.38,45.42-45.42,45.42H95.42C70.38,210,50,189.62,50,164.58V95.42C50,70.38,70.38,50,95.42,50h69.16
-                                    C189.62,50,210,70.38,210,95.42V164.58z" fill="#fff"/>
-                                </svg>
-                            </a>
-                        </li>
-                        <li class="socials__item">
-                            <a href="https://facebook.com" class="footer__column-link socials__link">
-                                <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 .4C4.698.4.4 4.698.4 10s4.298 9.6 9.6 9.6 9.6-4.298 9.6-9.6S15.302.4 10 .4zm2.274 6.634h-1.443c-.171 0-.361.225-.361.524V8.6h1.805l-.273 1.486H10.47v4.461H8.767v-4.461H7.222V8.6h1.545v-.874c0-1.254.87-2.273 2.064-2.273h1.443v1.581z" fill="#fff"/></svg>
-                            </a>
-                        </li>
-                        <li class="socials__item">
-                            <a href="https://twitter.com" class="footer__column-link socials__link">
-                                <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 .4C4.698.4.4 4.698.4 10s4.298 9.6 9.6 9.6 9.6-4.298 9.6-9.6S15.302.4 10 .4zm3.905 7.864c.004.082.005.164.005.244 0 2.5-1.901 5.381-5.379 5.381a5.335 5.335 0 0 1-2.898-.85c.147.018.298.025.451.025.886 0 1.701-.301 2.348-.809a1.895 1.895 0 0 1-1.766-1.312 1.9 1.9 0 0 0 .853-.033 1.892 1.892 0 0 1-1.517-1.854v-.023c.255.141.547.227.857.237a1.89 1.89 0 0 1-.585-2.526 5.376 5.376 0 0 0 3.897 1.977 1.891 1.891 0 0 1 3.222-1.725 3.797 3.797 0 0 0 1.2-.459 1.9 1.9 0 0 1-.831 1.047 3.799 3.799 0 0 0 1.086-.299 3.834 3.834 0 0 1-.943.979z" fill="#fff"/></svg>
-                            </a>
-                        </li>
-                        <li class="socials__item">
-                            <a href="https://youtube.com" class="footer__column-link socials__link">
-                                <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M11.603 9.833L9.357 8.785C9.161 8.694 9 8.796 9 9.013v1.974c0 .217.161.319.357.228l2.245-1.048c.197-.092.197-.242.001-.334zM10 .4C4.698.4.4 4.698.4 10s4.298 9.6 9.6 9.6 9.6-4.298 9.6-9.6S15.302.4 10 .4zm0 13.5c-4.914 0-5-.443-5-3.9s.086-3.9 5-3.9 5 .443 5 3.9-.086 3.9-5 3.9z" fill="#fff"/></svg>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-            <p class="footer__privesy">Copyright 2022 First Class Driving School</p>
         </div>
-    </footer>
+    </section>
+
+
 
     <div class="register">
-        
+
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>

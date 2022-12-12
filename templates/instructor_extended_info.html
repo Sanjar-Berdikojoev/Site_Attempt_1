@@ -22,6 +22,8 @@
                             </div>
                             <h3 class="slider__slide-title"><a href="http://127.0.0.1:8000/">{{instructor.title}}</a></h3>
                             <p class="slider__slide-desc">{{instructor.extended_description}}</p>
+                                <p class="slider__slide-desc">Work experience: {{instructor.work_experience}}</p>
+                                <p class="slider__slide-desc">Favorite auto: {{instructor.favorite_auto}}</p>
                                 {% if request.user.is_superuser %}
                                     <a class="navbar__item">
                                       <a class="update_instructor_button" href="instructor/{{i.id}}/update">Update</a>
@@ -40,15 +42,25 @@
 
 <section class="instructor_reviews">
          <div class="container">
-             {% for f in instructor_review %}
+              <center>
+                                    <div class="model_creation_button">
+                                      <a class="add_model_button" href="/advantages/create">Add Comment</a>
+                                    </div>
+                </center>
+             {% for g in comment %}
              <div class="instructors_comment">
-                <a class="comment">{{f.post}}</a>
-                <a class="comment">{{f.name}}</a>
-                 <a class="comment">{{f.rating_choices}}</a>
-                 <a class="comment">{{f.comment}}</a>
-                 <a class="comment">{{f.created_date}}</a>
-                 <a class="comment">{{f.updated_date}}</a>
+                <a class="comment">{{g.name}}</a>
+                 <a class="comment">{{g.rating_choices}}</a>
+                 <a class="comment">{{g.comment}}</a>
+                 <a class="comment">{{g.created_date}}</a>
+                 <a class="comment">{{g.updated_date}}</a>
              </div>
+                                    <a class="navbar__item">
+                                      <a class="update_instructor_review_button" href="instructor_review/{{f.id}}/update">Update comment</a>
+                                    </a>
+                                    <a class="navbar__item">
+                                      <a class="delete_instructor_review_button" href="instructor_review/{{f.id}}/delete">Delete comment</a>
+                                    </a>
              {% endfor %}
          </div>
 </section>

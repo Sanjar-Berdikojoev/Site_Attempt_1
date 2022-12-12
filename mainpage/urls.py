@@ -4,7 +4,6 @@ urlpatterns = [
     path('', views.mainpage_all, name='home'),
     path('admin_panel', views.admin_panel_all, name='admin'),
     path('<int:id>/instructor', views.instructor_extended_info, name='instructor'),
-    path('<int:id>/instructor', views.instructor_reviews, name='reviews'),
     path('<int:id>/course', views.course_extended_info, name='course'),
     path('<int:id>/blog', views.blogs_extended_info, name='blog'),
     path('<int:id>/traffic_law', views.traffic_laws_extended_info, name='traffic_law'),
@@ -26,4 +25,7 @@ urlpatterns = [
     path('advantages/create', views.AdvantagesCreateView.as_view(), name='advantages_create'),
     path('advantages/<int:id>/update', views.AdvantagesUpdateView.as_view(), name='advantages_update'),
     path('advantages/<int:id>/delete', views.AdvantagesDeleteView.as_view(), name='advantages_delete'),
+    path('instructor_review/create', views.Instructor_ReviewCreateView.as_view(), name='instructor_review_create'),
+    path('instructor_review/<int:id>/update', views.Instructor_ReviewUpdateView.as_view(), name='instructor_review_update'),
+    path('instructor_review/<int:id>/delete', views.Instructor_ReviewDeleteView.as_view(), name='instructor_review_delete'),
 ]

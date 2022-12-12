@@ -29,3 +29,8 @@ class AdvantagesForm(forms.ModelForm):
     class Meta:
         model = models.Advantages
         fields = '__all__'
+
+class Instructor_ReviewForm(forms.ModelForm):
+    class Meta:
+        model = models.Instructor_Review
+        fields = '__all__'

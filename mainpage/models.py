@@ -9,6 +9,10 @@ class Instructor(models.Model):
     extended_description = models.TextField(null=True)
     work_experience = models.PositiveSmallIntegerField(null=True)
     favorite_auto = models.CharField(max_length=100, null=True)
+    post = models.ManyToManyField('Instructor_Review', blank=True, related_name='post')
+
+    # def __str__(self):
+    #     return 'Comment by {} on {}'.format(self.name, self.post)
 
     def __str__(self):
         return self.title
@@ -64,19 +68,20 @@ RATING_CHOICES = (
     ('2', 'Bad'),
     ('1', 'Terrible'),
 )
+
+
 class Instructor_Review(models.Model):
-    post = models.ForeignKey(Instructor, on_delete=models.CASCADE, related_name='comments')
     name = models.CharField(User, max_length=100)
-    rating_choices = RATING_CHOICES
+    rating_choices = models.CharField(choices = RATING_CHOICES, null=True, max_length=25)
     comment = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)
 
-    class Meta:
-        ordering = []
+    # class Meta:
+    #     ordering = 'created_date'
 
-    def __str__(self):
-        return 'Comment by {} on {}'.format(self.name, self.post)
+    # def __str__(self):
+    #     return 'Comment by {} on {}'.format(self.name, self.post)
 
 

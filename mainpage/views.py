@@ -39,7 +39,12 @@ def admin_panel_all(request):
 
 def instructor_extended_info(request, id):
     instructor = models.Instructor.objects.get(id=id)
-    return render(request, 'instructor_extended_info.html', {'instructor': instructor})
+    comment = instructor.post.all()
+    context = {
+        'instructor': instructor,
+        'comment': comment,
+    }
+    return render(request, 'instructor_extended_info.html', context)
 
 def course_extended_info(request, id):
     course = models.Course.objects.get(id=id)
@@ -70,21 +75,22 @@ class InstructorUpdateView(generic.UpdateView):
     form_class = forms.InstructorForm
     success_url = 'http://127.0.0.1:8000/'
 
+
     def get_object(self, **kwargs):
-        instructor_id = self.kwargs.get('id')
-        return get_object_or_404(models.Instructor, id=instructor_id)
-
-    def form_valid(self, form):
-        return super(InstructorUpdateView, self).form_valid(form=form)
+        course_id = self.kwargs.get('id')
+        return get_object_or_404(models.Instructor, id=course_id)
 
 
-class InstructorDeleteView(generic.DeleteView):
-    template_name = 'models_delete.html'
+class InstructorDeleteView(generic.CreateView):
+    template_name = 'instructor_create.html'
+    form_class = forms.InstructorForm
+    queryset = models.Instructor.objects.all()
     success_url = 'http://127.0.0.1:8000/'
 
-    def get_object(self, **kwargs):
-        instructor_id = self.kwargs.get('id')
-        return get_object_or_404(models.Instructor, id=instructor_id)
+    def form_valid(self, form):
+        print(form.cleaned_data)
+        return super(InstructorDeleteView, self).form_valid(form=form)
+
 
 
 class CourseCreateView(generic.CreateView):
@@ -252,11 +258,44 @@ class AdvantagesDeleteView(generic.DeleteView):
         return get_object_or_404(models.Advantages, id=advantages_id)
 
 
-def instructor_reviews(request):
-    reviews = models.Instructor_Review.objects.all()
-    return render(request, 'instructors_extended_info', {'reviews': reviews})
+# def instructor_reviews(request):
+#     reviews = models.Instructor_Review.objects.all()
+#     return render(request, 'instructors_extended_info.html', {'reviews': reviews})
 
 def average_rating(self):
     all_ratings = list(map(lambda x: x.value, self.comments.all()))
     average = np.array(all_ratings).astype(np.float)
     return np.average(average)
+
+
+class Instructor_ReviewCreateView(generic.CreateView):
+    template_name = 'models_create.html'
+    form_class = forms.Instructor_ReviewForm
+    queryset = models.Instructor_Review.objects.all()
+    success_url = 'http://127.0.0.1:8000/'
+
+    def form_valid(self, form):
+        print(form.cleaned_data)
+        return super(Instructor_ReviewCreateView, self).form_valid(form=form)
+
+
+class Instructor_ReviewUpdateView(generic.UpdateView):
+    template_name = 'models_update.html'
+    form_class = forms.Instructor_ReviewForm
+    success_url = 'http://127.0.0.1:8000/'
+
+    def get_object(self, **kwargs):
+        instructor_review_id = self.kwargs.get('id')
+        return get_object_or_404(models.Instructor_Review, id=instructor_review_id)
+
+    def form_valid(self, form):
+        return super(Instructor_ReviewUpdateView, self).form_valid(form=form)
+
+
+class Instructor_ReviewDeleteView(generic.DeleteView):
+    template_name = 'models_delete.html'
+    success_url = 'http://127.0.0.1:8000/'
+
+    def get_object(self, **kwargs):
+        instructor_review_id = self.kwargs.get('id')
+        return get_object_or_404(models.Instructor_Review, id=instructor_review_id)

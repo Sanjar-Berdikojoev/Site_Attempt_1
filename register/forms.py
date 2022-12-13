@@ -24,7 +24,7 @@ class RegistrationForm(UserCreationForm):
     gender = forms.ChoiceField(choices=GENDER_TYPE, required=True)
 
     class Meta:
-        model=models.CustomUser
+        model = models.CustomUser
         fields = (
             'username',
             'email',

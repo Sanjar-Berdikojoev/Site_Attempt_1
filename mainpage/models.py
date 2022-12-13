@@ -25,6 +25,9 @@ class Course(models.Model):
     price = models.PositiveIntegerField()
     duration = models.PositiveIntegerField()
     lessons = models.PositiveIntegerField()
+    age = models.PositiveSmallIntegerField(null=True)
+    practice = models.PositiveIntegerField(null=True)
+    category_letter = models.CharField(max_length=3, null=True)
 
     def __str__(self):
         return self.title
@@ -77,6 +80,7 @@ class Instructor_Review(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
     updated_date = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)
+
 
     # class Meta:
     #     ordering = 'created_date'

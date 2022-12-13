@@ -28,4 +28,9 @@ urlpatterns = [
     path('instructor_review/create', views.Instructor_ReviewCreateView.as_view(), name='instructor_review_create'),
     path('instructor_review/<int:id>/update', views.Instructor_ReviewUpdateView.as_view(), name='instructor_review_update'),
     path('instructor_review/<int:id>/delete', views.Instructor_ReviewDeleteView.as_view(), name='instructor_review_delete'),
+    path('about_us/', views.about_us_view, name='about_us'),
+    path('courses/', views.CoursesView.as_view(), name='courses'),
+    path('courses/<int:id>/courses_info', views.CoursesDetailView.as_view(), name='courses_info'),
+    path('instructors/', views.InstructorsView.as_view(), name='instructors'),
+    path('instructors/<int:id>/instructors_info', views.InstructorsDetailView.as_view(), name='instructors_info')
 ]

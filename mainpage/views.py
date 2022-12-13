@@ -299,3 +299,37 @@ class Instructor_ReviewDeleteView(generic.DeleteView):
     def get_object(self, **kwargs):
         instructor_review_id = self.kwargs.get('id')
         return get_object_or_404(models.Instructor_Review, id=instructor_review_id)
+
+
+def about_us_view(request):
+    return render(request, 'about_us.html')
+
+class CoursesView(generic.ListView):
+    template_name = 'courses.html'
+    queryset = models.Course.objects.all()
+
+    def get_queryset(self):
+        return models.Course.objects.all()
+
+class CoursesDetailView(generic.DetailView):
+    template_name = 'courses_info.html'
+
+    def get_object(self, **kwargs):
+        course_id = self.kwargs.get('id')
+        return get_object_or_404(models.Course, id=course_id)
+
+
+class InstructorsView(generic.ListView):
+    template_name = 'instructors.html'
+    queryset = models.Instructor.objects.all()
+
+    def get_queryset(self):
+        return models.Instructor.objects.all()
+
+class InstructorsDetailView(generic.DetailView):
+    template_name = 'instructors_info.html'
+
+    def get_object(self, **kwargs):
+        instructor_id = self.kwargs.get('id')
+        return get_object_or_404(models.Instructor, id=instructor_id)
+

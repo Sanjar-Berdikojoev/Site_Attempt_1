@@ -23,33 +23,48 @@
                             <span></span>
                         </div>
                         <nav class="navbar">
-                            <ul class="navbar__list">
-                                <li class="navbar__item">
-                                    <a href="{% url 'home' %}" class="navbar__link">Home</a>
-                                </li>
-                                <li class="navbar__item">
-                                    <a href="{% url 'about_us' %}" class="navbar__link">About us</a>
-                                </li>
-                                <li class="navbar__item">
-                                    <a href="{% url 'courses' %}" class="navbar__link">Courses</a>
-                                </li>
-                                <li class="navbar__item">
-                                    <a href="{% url 'instructors' %}" class="navbar__link active">Instructors</a>
-                                </li>
-                                <li class="navbar__item">
-                                    <a href="./contacts.html" class="navbar__link">Contacts</a>
-                                </li>
-                                <li class="navbar__item">
-                                    <a href="./blog.html" class="navbar__link">Blog</a>
-                                </li>
-                                <li class="navbar__item">
-                                    <a href="./faqs.html" class="navbar__link">FAQs</a>
-                                </li>
-                                <li class="navbar__item">
-                                    <a href="./login.html" class="navbar__link">Login</a>
-                                </li>
-                            </ul>
-                        </nav>
+                                <ul class="navbar__list">
+                                    <li class="navbar__item">
+                                        <a href="{% url 'home' %}" class="navbar__link">Home</a>
+                                    </li>
+                                    <li class="navbar__item">
+                                        <a href="{% url 'about_us' %}" class="navbar__link">About us</a>
+                                    </li>
+                                    <li class="navbar__item">
+                                        <a href="{% url 'courses' %}" class="navbar__link">Courses</a>
+                                    </li>
+                                    <li class="navbar__item">
+                                        <a href="{% url 'instructors' %}" class="navbar__link active">Instructors</a>
+                                    </li>
+                                    <li class="navbar__item">
+                                        <a href="./blog.html" class="navbar__link">Blog</a>
+                                    </li>
+                                    <li class="navbar__item">
+                                        <a href="{% url 'frequently_asked_questions' %}" class="navbar__link">FAQs</a>
+                                    </li>
+                                    <li class="navbar__item">
+                                        <a href="{% url 'contacts' %}" class="navbar__link">Contacts</a>
+                                    </li>
+                                    <li class="navbar__item">
+                                        <a class="navbar__link" href="/registration/">Register</a>
+                                    </li>
+{% if request.user.is_superuser %}
+                                    <li class="navbar__item">
+                                      <a class="admin_panel_button" href="/admin_panel">Admin Panel</a>
+                                    </li>
+
+                                        {% endif %}
+                                    {% if request.user.is_authenticated%}
+       <li class="navbar__item">
+                                        <a class="navbar__link" href="/logout/">Logout</a>
+                                    </li>
+        {% else %}
+       <li class="navbar__item">
+                                        <a class="navbar__link" href="/login/">Login</a>
+                                    </li>
+        {% endif %}
+                                </ul>
+                            </nav>
                     </div>
                 </div>
             </div>
@@ -66,34 +81,339 @@
                     <a href="{% url 'instructors' %}" class="breadcrumb__link">Instructors</a>
                 </li>
                 <li class="breadcrumb__item">
-                    <a href="#" class="breadcrumb__link">{{instructor.title}}</a>
+                    <a href="" class="breadcrumb__link">{{instructor.title}}</a>
                 </li>
             </ul>
         </div>
     </div>
+
+    <main class="instructorsinfo">
+        <section class="instructorsinfo__inner">
+            <div class="container">
+                <div class="instructorsinfo__card">
+                    {% if request.user.is_superuser %}
+                    <button class="update">
+                        <?xml version="1.0" encoding="iso-8859-1"?>
+                        <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                            viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
+                        <g>
+                            <g id="spin">
+                                <g>
+                                    <path d="M25.883,6.086l-2.82,2.832C24.953,10.809,26,13.324,26,16c0,5.516-4.484,10-10,10v-2l-4,4l4,4v-2
+                                        c7.719,0,14-6.281,14-14C30,12.254,28.539,8.734,25.883,6.086z"/>
+                                    <path  d="M20,4l-4-4v2C8.281,2,2,8.281,2,16c0,3.746,1.461,7.266,4.117,9.914l2.82-2.832
+                                        C7.047,21.191,6,18.676,6,16c0-5.516,4.484-10,10-10v2L20,4z"/>
+                                </g>
+                            </g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        </svg>
+
+                    </button>
+                    <button href="/{{i.id}}/delete" class="delete">
+                        <?xml version="1.0" encoding="iso-8859-1"?>
+                        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                            viewBox="0 0 443 443" style="enable-background:new 0 0 443 443;" xml:space="preserve">
+                        <g>
+                            <path d="M321.785,38h-83.384V0H125.169v38H41.785v60h280V38z M155.169,30h53.232v8h-53.232V30z"/>
+                            <path d="M295.142,214.31l5.66-86.31H62.769l19.016,290h114.172c-14.861-21.067-23.602-46.746-23.602-74.43
+                                C172.355,274.43,226.849,217.779,295.142,214.31z"/>
+                            <path d="M301.785,244.141c-54.826,0-99.43,44.604-99.43,99.429S246.959,443,301.785,443s99.43-44.604,99.43-99.43
+                                S356.611,244.141,301.785,244.141z M355.961,376.533l-21.213,21.213l-32.963-32.963l-32.963,32.963l-21.213-21.213l32.963-32.963
+                                l-32.963-32.963l21.213-21.213l32.963,32.963l32.963-32.963l21.213,21.213l-32.963,32.963L355.961,376.533z"/>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        <g>
+                        </g>
+                        </svg>
+
+                    </button>
+                    {% endif %}
+                    <div class="instructorsinfo__card-img-wrapper">
+                        <img src="{{instructor.image.url}}" alt="instructor" class="instructorsinfo__card-img">
+                    </div>
+                    <div class="instructorsinfo__card-inner">
+                        <h2 class="instructorsinfo__card-name">{{instructor.title}}</h2>
+                        <div class="instructorsinfo__card-experience">
+                            <div class="general-experience property">General experience: <span class="experience-number value">{{instructor.general_experience}}</span></div>
+                            <div class="teaching-experience property">Teaching experience: <span class="experience-number value">{{instructor.teaching_experience}}</span></div>
+                        </div>
+                        <div class="instructorsinfo__card-category property">Teaching category: <span class="category value">{{i.teaching_category}}</span></div>
+                        <div class="instructorsinfo__card-car driving-car property">Driving car: <sapn class="value car-model">{{instructor.driving_car}}</sapn></div>
+                        <div class="instructorsinfo__card-number property">Phone number: <span class="instructor-number value"><a href="tel:+996777789564">{{instructor.phone_number}}</a></span></div>
+                        <p class="instructorsinfo__card-text">
+                            Young but not inexperienced instructor. Due to the fact that many students of our driving school are young people, it is easy for him to find a common language with them and find an individual approach to everyone.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="reviews">
+            <div class="container">
+                <div class="reviews__inner">
+                    <h3 class="reviews__title">Reviews</h3>
+                    <form action="/" method="POST"class="reviews__form">
+                        <textarea placeholder="Write a comment"  class="reviews__form-field" name="review" id="" cols="30" rows="10"></textarea>
+                        <label class="reviews__form-rate">
+                            <h4 class="reviews__form-rate-title">Rate us</h4>
+                            <select class="reviews__form-select" name="select">
+                                <option class="reviews__form-option" value="Perfect">Perfect</option>
+                                <option class="reviews__form-option" value="Good">Good</option>
+                                <option class="reviews__form-option" value="Normal">Normal</option>
+                                <option class="reviews__form-option" value="Bad">Bad</option>
+                                <option class="reviews__form-option" value="Awful">Awful</option>
+                            </select>
+                        </label>
+                        <label class="reviews__form-buttons">
+                            <button type="reset" class="reviews__form-button cancel">Cancel</button>
+                            <button type="submit" class="reviews__form-button delete">Leave review</button>
+                        </label>
+                    </form>
+                    <ul class="reviews__list">
+                        <li class="reviews__item comment">
+                            <button class="update">
+                                <?xml version="1.0" encoding="iso-8859-1"?>
+                                <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                    viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
+                                <g>
+                                    <g id="spin">
+                                        <g>
+                                            <path d="M25.883,6.086l-2.82,2.832C24.953,10.809,26,13.324,26,16c0,5.516-4.484,10-10,10v-2l-4,4l4,4v-2
+                                                c7.719,0,14-6.281,14-14C30,12.254,28.539,8.734,25.883,6.086z"/>
+                                            <path  d="M20,4l-4-4v2C8.281,2,2,8.281,2,16c0,3.746,1.461,7.266,4.117,9.914l2.82-2.832
+                                                C7.047,21.191,6,18.676,6,16c0-5.516,4.484-10,10-10v2L20,4z"/>
+                                        </g>
+                                    </g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                </svg>
+
+                            </button>
+                            <button class="delete">
+                                <?xml version="1.0" encoding="iso-8859-1"?>
+                                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                    viewBox="0 0 443 443" style="enable-background:new 0 0 443 443;" xml:space="preserve">
+                                <g>
+                                    <path d="M321.785,38h-83.384V0H125.169v38H41.785v60h280V38z M155.169,30h53.232v8h-53.232V30z"/>
+                                    <path d="M295.142,214.31l5.66-86.31H62.769l19.016,290h114.172c-14.861-21.067-23.602-46.746-23.602-74.43
+                                        C172.355,274.43,226.849,217.779,295.142,214.31z"/>
+                                    <path d="M301.785,244.141c-54.826,0-99.43,44.604-99.43,99.429S246.959,443,301.785,443s99.43-44.604,99.43-99.43
+                                        S356.611,244.141,301.785,244.141z M355.961,376.533l-21.213,21.213l-32.963-32.963l-32.963,32.963l-21.213-21.213l32.963-32.963
+                                        l-32.963-32.963l21.213-21.213l32.963,32.963l32.963-32.963l21.213,21.213l-32.963,32.963L355.961,376.533z"/>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                <g>
+                                </g>
+                                </svg>
+
+                            </button>
+                            <div class="comment__info">
+                                <h4 class="comment__name">{{i.name}}</h4>
+                                <div class="comment__date">{{i.created_date}}</div>
+                            </div>
+                            <p class="comment__text">{{i.comment}}</p>
+                            <div class="comment__info">
+                                <div class="comment__rating">Raiting: </div>
+                                <div class="comment__value">Good</div>
+                            </div>
+                        </li>
+
+                        <li class="reviews__item comment">
+                            <div class="comment__info">
+                                <h4 class="comment__name">Zalkar</h4>
+                                <div class="comment__date">24.03.2021</div>
+                            </div>
+                            <p class="comment__text">sonething</p>
+                            <div class="comment__info">
+                                <div class="comment__rating">Raiting: </div>
+                                <div class="comment__value">Good</div>
+                            </div>
+                        </li>
+                        <li class="reviews__item comment">
+                            <div class="comment__info">
+                                <h4 class="comment__name">Zalkar</h4>
+                                <div class="comment__date">24.03.2021</div>
+                            </div>
+                            <p class="comment__text">sonething</p>
+                            <div class="comment__info">
+                                <div class="comment__rating">Raiting: </div>
+                                <div class="comment__value">Good</div>
+                            </div>
+                        </li>
+                        <li class="reviews__item comment">
+                            <div class="comment__info">
+                                <h4 class="comment__name">Zalkar</h4>
+                                <div class="comment__date">24.03.2021</div>
+                            </div>
+                            <p class="comment__text">sonething</p>
+                            <div class="comment__info">
+                                <div class="comment__rating">Raiting: </div>
+                                <div class="comment__value">Good</div>
+                            </div>
+                        </li>
+                        <li class="reviews__item comment">
+                            <div class="comment__info">
+                                <h4 class="comment__name">Zalkar</h4>
+                                <div class="comment__date">24.03.2021</div>
+                            </div>
+                            <p class="comment__text">sonething</p>
+                            <div class="comment__info">
+                                <div class="comment__rating">Raiting: </div>
+                                <div class="comment__value">Good</div>
+                            </div>
+                        </li>
+                        <li class="reviews__item comment">
+                            <div class="comment__info">
+                                <h4 class="comment__name">Zalkar</h4>
+                                <div class="comment__date">24.03.2021</div>
+                            </div>
+                            <p class="comment__text">sonething</p>
+                            <div class="comment__info">
+                                <div class="comment__rating">Raiting: </div>
+                                <div class="comment__value">Good</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+    </main>
 
 
     <footer class="footer">
         <div class="container">
             <div class="footer__inner">
                 <div class="footer__column">
-                    <a href="index.html" class="footer__logo logo">
+                    <a href="{% url 'home' %}" class="footer__logo logo">
                         First Class
                     </a>
                 </div>
                 <div class="footer__column">
                     <h3 class="footer__column-title">Main links</h3>
-                    <a href="./about_us.html" class="footer__column-link">about us</a>
-                    <a href="./instructors.html" class="footer__column-link">instructors</a>
-                    <a href="./courses.html" class="footer__column-link">courses</a>
+                    <a href="{% url 'about_us' %}" class="footer__column-link">about us</a>
+                    <a href="{% url 'instructors' %}" class="footer__column-link">instructors</a>
+                    <a href="{% url 'courses' %}" class="footer__column-link">courses</a>
                     <a href="./traffic_laws.html" class="footer__column-link">traffic laws</a>
                 </div>
                 <div class="footer__column">
                     <h3 class="footer__column-title">Useful links</h3>
-                    <a href="./login.html" class="footer__column-link">login</a>
-                    <a href="./contacts.html" class="footer__column-link">contacts</a>
+                    <a href="/login/" class="footer__column-link">login</a>
+                    <a href="{% url 'contacts' %}" class="footer__column-link">contacts</a>
                     <a href="./blog.html" class="footer__column-link">blog</a>
-                    <a href="./faqs.html" class="footer__column-link">FAQs</a>
+                    <a href="{% url 'frequently_asked_questions' %}" class="footer__column-link">FAQs</a>
                 </div>
                 <div class="footer__column socials">
                     <h3 class="footer__column-title socials__ешеду">Follow us:</h3>

@@ -23,33 +23,48 @@
                             <span></span>
                         </div>
                         <nav class="navbar">
-                            <ul class="navbar__list">
-                                <li class="navbar__item">
-                                    <a href="{% url 'home' %}" class="navbar__link">Home</a>
-                                </li>
-                                <li class="navbar__item">
-                                    <a href="{% url 'about_us' %}" class="navbar__link">About us</a>
-                                </li>
-                                <li class="navbar__item">
-                                    <a href="{% url 'courses' %}" class="navbar__link active">Courses</a>
-                                </li>
-                                <li class="navbar__item">
-                                    <a href="{% url 'instructors' %}" class="navbar__link">Instructors</a>
-                                </li>
-                                <li class="navbar__item">
-                                    <a href="./contacts.html" class="navbar__link">Contacts</a>
-                                </li>
-                                <li class="navbar__item">
-                                    <a href="./blog.html" class="navbar__link">Blog</a>
-                                </li>
-                                <li class="navbar__item">
-                                    <a href="./faqs.html" class="navbar__link">FAQs</a>
-                                </li>
-                                <li class="navbar__item">
-                                    <a href="./login.html" class="navbar__link">Login</a>
-                                </li>
-                            </ul>
-                        </nav>
+                                <ul class="navbar__list">
+                                    <li class="navbar__item">
+                                        <a href="{% url 'home' %}" class="navbar__link">Home</a>
+                                    </li>
+                                    <li class="navbar__item">
+                                        <a href="{% url 'about_us' %}" class="navbar__link">About us</a>
+                                    </li>
+                                    <li class="navbar__item">
+                                        <a href="{% url 'courses' %}" class="navbar__link active">Courses</a>
+                                    </li>
+                                    <li class="navbar__item">
+                                        <a href="{% url 'instructors' %}" class="navbar__link">Instructors</a>
+                                    </li>
+                                    <li class="navbar__item">
+                                        <a href="./blog.html" class="navbar__link">Blog</a>
+                                    </li>
+                                    <li class="navbar__item">
+                                        <a href="{% url 'frequently_asked_questions' %}" class="navbar__link">FAQs</a>
+                                    </li>
+                                    <li class="navbar__item">
+                                        <a href="{% url 'contacts' %}" class="navbar__link">Contacts</a>
+                                    </li>
+                                    <li class="navbar__item">
+                                        <a class="navbar__link" href="/registration/">Register</a>
+                                    </li>
+{% if request.user.is_superuser %}
+                                    <li class="navbar__item">
+                                      <a class="admin_panel_button" href="/admin_panel">Admin Panel</a>
+                                    </li>
+
+                                        {% endif %}
+                                    {% if request.user.is_authenticated%}
+       <li class="navbar__item">
+                                        <a class="navbar__link" href="/logout/">Logout</a>
+                                    </li>
+        {% else %}
+       <li class="navbar__item">
+                                        <a class="navbar__link" href="/login/">Login</a>
+                                    </li>
+        {% endif %}
+                                </ul>
+                            </nav>
                     </div>
                 </div>
             </div>
@@ -189,23 +204,23 @@
         <div class="container">
             <div class="footer__inner">
                 <div class="footer__column">
-                    <a href="index.html" class="footer__logo logo">
+                    <a href="{% url 'home' %}" class="footer__logo logo">
                         First Class
                     </a>
                 </div>
                 <div class="footer__column">
                     <h3 class="footer__column-title">Main links</h3>
-                    <a href="./about_us.html" class="footer__column-link">about us</a>
-                    <a href="./instructors.html" class="footer__column-link">instructors</a>
-                    <a href="./courses.html" class="footer__column-link">courses</a>
+                    <a href="{% url 'about_us' %}" class="footer__column-link">about us</a>
+                    <a href="{% url 'instructors' %}" class="footer__column-link">instructors</a>
+                    <a href="{% url 'courses' %}" class="footer__column-link">courses</a>
                     <a href="./traffic_laws.html" class="footer__column-link">traffic laws</a>
                 </div>
                 <div class="footer__column">
                     <h3 class="footer__column-title">Useful links</h3>
-                    <a href="./login.html" class="footer__column-link">login</a>
-                    <a href="./contacts.html" class="footer__column-link">contacts</a>
+                    <a href="/login/" class="footer__column-link">login</a>
+                    <a href="{% url 'contacts' %}" class="footer__column-link">contacts</a>
                     <a href="./blog.html" class="footer__column-link">blog</a>
-                    <a href="./faqs.html" class="footer__column-link">FAQs</a>
+                    <a href="{% url 'frequently_asked_questions' %}" class="footer__column-link">FAQs</a>
                 </div>
                 <div class="footer__column socials">
                     <h3 class="footer__column-title socials__ешеду">Follow us:</h3>

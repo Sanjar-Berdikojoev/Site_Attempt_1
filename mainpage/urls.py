@@ -1,10 +1,11 @@
 from django.urls import path
 from . import views
+
 urlpatterns = [
     path('', views.mainpage_all, name='home'),
     path('admin_panel', views.admin_panel_all, name='admin'),
-    path('<int:id>/instructor', views.instructor_extended_info, name='instructor'),
-    path('<int:id>/course', views.course_extended_info, name='course'),
+    path('<int:id>/instructor', views.InstructorsDetailView.as_view(), name='instructor_info'),
+    path('<int:id>/course', views.CoursesDetailView.as_view(), name='course_info'),
     path('<int:id>/blog', views.blogs_extended_info, name='blog'),
     path('<int:id>/traffic_law', views.traffic_laws_extended_info, name='traffic_law'),
     path('instructor/create', views.InstructorCreateView.as_view(), name='instructor_create'),
@@ -29,8 +30,10 @@ urlpatterns = [
     path('instructor_review/<int:id>/update', views.Instructor_ReviewUpdateView.as_view(), name='instructor_review_update'),
     path('instructor_review/<int:id>/delete', views.Instructor_ReviewDeleteView.as_view(), name='instructor_review_delete'),
     path('about_us/', views.about_us_view, name='about_us'),
+    path('contacts/', views.contacts_view, name='contacts'),
     path('courses/', views.CoursesView.as_view(), name='courses'),
     path('courses/<int:id>/courses_info', views.CoursesDetailView.as_view(), name='courses_info'),
     path('instructors/', views.InstructorsView.as_view(), name='instructors'),
-    path('instructors/<int:id>/instructors_info', views.InstructorsDetailView.as_view(), name='instructors_info')
+    path('instructors/<int:id>/instructors_info', views.InstructorsDetailView.as_view(), name='instructors_info'),
+    path('frequently_asked_questions/', views.FAQView.as_view(), name='frequently_asked_questions'),
 ]

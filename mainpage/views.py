@@ -304,6 +304,17 @@ class Instructor_ReviewDeleteView(generic.DeleteView):
 def about_us_view(request):
     return render(request, 'about_us.html')
 
+def contacts_view(request):
+    return render(request, 'contacts.html')
+
+class FAQView(generic.ListView):
+    template_name = 'faqs.html'
+    queryset = models.Frequently_Asked_Questions.objects.all()
+
+    def get_queryset(self):
+        return models.Frequently_Asked_Questions.objects.all()
+
+
 class CoursesView(generic.ListView):
     template_name = 'courses.html'
     queryset = models.Course.objects.all()

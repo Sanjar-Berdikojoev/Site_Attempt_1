@@ -18,7 +18,7 @@
             <div class="header__top">
                 <div class="container">
                     <div class="header__top-inner">
-                        <a href="index.html" class="header__logo logo">
+                        <a href="{% url 'home' %}" class="header__logo logo">
                             First Class
                         </a>
                         <div class="header__menu menu">
@@ -40,13 +40,13 @@
                                         <a href="{% url 'instructors' %}" class="navbar__link">Instructors</a>
                                     </li>
                                     <li class="navbar__item">
-                                        <a href="pages/blog.html" class="navbar__link">Blog</a>
+                                        <a href="./blog.html" class="navbar__link">Blog</a>
                                     </li>
                                     <li class="navbar__item">
-                                        <a href="pages/faqs.html" class="navbar__link">FAQs</a>
+                                        <a href="{% url 'frequently_asked_questions' %}" class="navbar__link">FAQs</a>
                                     </li>
                                     <li class="navbar__item">
-                                        <a href="pages/contacts.html" class="navbar__link">Contacts</a>
+                                        <a href="{% url 'contacts' %}" class="navbar__link">Contacts</a>
                                     </li>
                                     <li class="navbar__item">
                                         <a class="navbar__link" href="/registration/">Register</a>
@@ -160,7 +160,8 @@
                                 <img src="{{i.image.url}}" alt="instructor" class="img slider__slide-img">
                             </div>
                             <h3 class="slider__slide-title"><a href="{{i.id}}/instructor">{{i.title}}</a></h3>
-                            <p class="slider__slide-desc">{{i.description}}</p>
+                            <p class="slider__slide-desc">General experience {{i.general_experience}}</p>
+                            <p class="slider__slide-desc">Teaching experience {{i.teaching_experience}}</p>
                         </div>
                         {% endfor %}
                     </div>
@@ -178,7 +179,7 @@
                         Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id saepe accusamus, tenetur laboriosam architecto soluta temporibus eaque voluptas. Ipsam quo laboriosam distinctio facere, placeat atque illo quod. Cupiditate dolores hic vitae, amet modi quas numquam! Soluta voluptatem consectetur et, ducimus quisquam harum ad nihil sit rerum optio eius explicabo enim, quidem molestias magni aut doloribus. Ipsam iusto ipsum adipisci reprehenderit magnam eaque blanditiis, at omnis rem mollitia quae tempore eveniet sed aut molestias dolor cumque nulla optio beatae. Asperiores earum praesentium ipsa cupiditate ea dolor ex rerum assumenda cum blanditiis minus itaque quasi, fugit explicabo facilis sed. Incidunt, iure quidem!
                     </p>
                     <button class="courses__info-button">
-                        <a href="pages/courses.html" class="courses__info-link">View all</a>
+                        <a href="/courses/" class="courses__info-link">View all</a>
                     </button>
                 </div>
 
@@ -283,27 +284,27 @@
             </div>
     </section>
  
-    <footer class="footer">
+ <footer class="footer">
         <div class="container">
             <div class="footer__inner">
                 <div class="footer__column">
-                    <a href="index.html" class="footer__logo logo">
+                    <a href="{% url 'home' %}" class="footer__logo logo">
                         First Class
                     </a>
                 </div>
                 <div class="footer__column">
                     <h3 class="footer__column-title">Main links</h3>
-                    <a href="./pages/about_us.html" class="footer__column-link">about us</a>
-                    <a href="./pages/instructors.html" class="footer__column-link">instructors</a>
-                    <a href="./pages/courses.html" class="footer__column-link">courses</a>
-                    <a href="./pages/traffic_laws.html" class="footer__column-link">traffic laws</a>
+                    <a href="{% url 'about_us' %}" class="footer__column-link">about us</a>
+                    <a href="{% url 'instructors' %}" class="footer__column-link">instructors</a>
+                    <a href="{% url 'courses' %}" class="footer__column-link">courses</a>
+                    <a href="./traffic_laws.html" class="footer__column-link">traffic laws</a>
                 </div>
                 <div class="footer__column">
                     <h3 class="footer__column-title">Useful links</h3>
-                    <a href="#" class="footer__column-link">register</a>
-                    <a href="./pages/contacts.html" class="footer__column-link">contacts</a>
-                    <a href="./pages/blog.html" class="footer__column-link">blog</a>
-                    <a href="./pages/faqs.html" class="footer__column-link">FAQs</a>
+                    <a href="/login/" class="footer__column-link">login</a>
+                    <a href="{% url 'contacts' %}" class="footer__column-link">contacts</a>
+                    <a href="./blog.html" class="footer__column-link">blog</a>
+                    <a href="{% url 'frequently_asked_questions' %}" class="footer__column-link">FAQs</a>
                 </div>
                 <div class="footer__column socials">
                     <h3 class="footer__column-title socials__ешеду">Follow us:</h3>
@@ -347,7 +348,7 @@
     </footer>
 
     <div class="register">
-        
+
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>

@@ -7,12 +7,13 @@ class Instructor(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
     extended_description = models.TextField(null=True)
-    work_experience = models.PositiveSmallIntegerField(null=True)
-    favorite_auto = models.CharField(max_length=100, null=True)
+    general_experience = models.PositiveSmallIntegerField(null=True)
+    teaching_experience = models.PositiveSmallIntegerField(null=True)
+    teaching_category = models.CharField(max_length=3, null=True)
+    driving_car = models.CharField(max_length=100, null=True)
+    phone_number = models.CharField(max_length=20, null=True)
     post = models.ManyToManyField('Instructor_Review', blank=True, related_name='post')
 
-    # def __str__(self):
-    #     return 'Comment by {} on {}'.format(self.name, self.post)
 
     def __str__(self):
         return self.title
@@ -82,10 +83,5 @@ class Instructor_Review(models.Model):
     active = models.BooleanField(default=True)
 
 
-    # class Meta:
-    #     ordering = 'created_date'
-
-    # def __str__(self):
-    #     return 'Comment by {} on {}'.format(self.name, self.post)
 
 

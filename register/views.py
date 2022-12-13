@@ -8,10 +8,12 @@ from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 
+
+
 class Registration(CreateView):
     form_class = UserCreationForm
     success_url = 'http://127.0.0.1:8000/'
-    template_name = 'register.html'
+    template_name = 'registration.html'
 
 
 class NewLoginForm(LoginView):

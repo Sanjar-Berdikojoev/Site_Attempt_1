@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <title>First Class Driving School</title>
+</head>
+<body>
+    <header class="header">
+        <div class="header__top">
+            <div class="container">
+                <div class="header__top-inner">
+                    <a href="{% url 'home' %}" class="header__logo logo">
+                        First Class
+                    </a>
+                    <div class="header__menu menu">
+                        <div class="menu__icon">
+                            <span></span>
+                        </div>
+                        <nav class="navbar">
+                                <ul class="navbar__list">
+                                    <li class="navbar__item">
+                                        <a href="{% url 'home' %}" class="navbar__link">Home</a>
+                                    </li>
+                                    <li class="navbar__item">
+                                        <a href="{% url 'about_us' %}" class="navbar__link">About us</a>
+                                    </li>
+                                    <li class="navbar__item">
+                                        <a href="{% url 'courses' %}" class="navbar__link">Courses</a>
+                                    </li>
+                                    <li class="navbar__item">
+                                        <a href="{% url 'instructors' %}" class="navbar__link">Instructors</a>
+                                    </li>
+                                    <li class="navbar__item">
+                                        <a href="{% url 'blogs' %}" class="navbar__link active">Blog</a>
+                                    </li>
+                                    <li class="navbar__item">
+                                        <a href="{% url 'frequently_asked_questions' %}" class="navbar__link">FAQs</a>
+                                    </li>
+                                    <li class="navbar__item">
+                                        <a href="{% url 'contacts' %}" class="navbar__link">Contacts</a>
+                                    </li>
+                                    <li class="navbar__item">
+                                        <a class="navbar__link" href="/registration/">Register</a>
+                                    </li>
+{% if request.user.is_superuser %}
+                                    <li class="navbar__item">
+                                      <a class="navbar__link" href="/admin">Admin Panel</a>
+                                    </li>
+
+                                        {% endif %}
+                                    {% if request.user.is_authenticated%}
+       <li class="navbar__item">
+                                        <a class="navbar__link" href="/logout/">Logout</a>
+                                    </li>
+        {% else %}
+       <li class="navbar__item">
+                                        <a class="navbar__link" href="/login/">Login</a>
+                                    </li>
+        {% endif %}
+                                </ul>
+                            </nav>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="breadcrumb">
+        <div class="container">
+            <ul class="breadcrumb__list">
+                <li class="breadcrumb__item">
+                    <a href="{% url 'home' %}" class="breadcrumb__link">Home</a>
+                </li>
+                <li class="breadcrumb__item">
+                    <a href="{% url 'blogs' %}" class="breadcrumb__link">Blog</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <main class="Blog">
+        <section class="Blog__inner">
+            <div class="container">
+                <h1 class="Blog__title">Blog</h1>
+                <div class="Blog__content">
+                    {% for i in object_list %}
+                    <div class="Blog__item">
+                        <div class="Blog__item-img-wrapper">
+                            <img src="{{i.image.url}}" alt="article img" class="Blog__item-img">
+                        </div>
+                        <div class="Blog__item-info">
+                            <h3 class="Blog__item-title">{{i.title}}</h3>
+                            <p class="Blog__item-text Blog__item-text-1">
+                                {{i.description}}
+                            </p>
+                            <div class="Blog__item-bottom"><a href="{{i.id}}/blogs_info" class="Blog__item-link">Read more</a>
+                                <div class="Blog__item-auth">
+                                    <div class="Blog__item-user">{{i.user}}</div>
+                                    <div class="Blog__item-date">{{i.created_date}}</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+<!--                    <div class="Blog__item">-->
+<!--                        <div class="Blog__item-img-wrapper">-->
+<!--                            <img src="../images/safe.jpg" alt="article img" class="Blog__item-img">-->
+<!--                        </div>-->
+<!--                        <div class="Blog__item-info">-->
+<!--                            <h3 class="Blog__item-title">10 Practices That Make You a Safer Driver</h3>-->
+<!--                            <p class="Blog__item-text Blog__item-text-1">-->
+<!--                                Although the 2020 lockdown resulted in a 49..47% fall in the number of lives lost in road accidents (April - June, as compared to numbers from 2019) [source], the fact remains that there's still a lot of effort required. To make that happen, one must become a responsible driver and inculcate driving practices that help maintain safety for one and all on the road.-->
+
+<!--                                Driving is an art that needs to be mastered with focus and discipline. Whether you are a new driver who wants to learn how to drive a car or among the experienced drivers who want to brush up their skills, choosing a professional driving school is always a good idea.-->
+
+<!--                                Helping you master safe and responsible driving, Maruti Suzuki Driving Schools are equipped with the best-in-class facilities, expert trainers, a well-balanced curriculum, and much more, which makes the learning experience even more amazing.-->
+
+<!--                                Let's get to the tips that can help you become a safer driver: - -->
+<!--                            </p>-->
+<!--                            <div class="Blog__item-bottom"><a href="./blog_info.html" class="Blog__item-link">Read more</a>-->
+<!--                                <div class="Blog__item-auth">-->
+<!--                                    <div class="Blog__item-user">Zalkar</div>-->
+<!--                                    <div class="Blog__item-date">22.03.2022</div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="Blog__item">-->
+<!--                        <div class="Blog__item-img-wrapper">-->
+<!--                            <img src="../images/safe.jpg" alt="article img" class="Blog__item-img">-->
+<!--                        </div>-->
+<!--                        <div class="Blog__item-info">-->
+<!--                            <h3 class="Blog__item-title">10 Practices That Make You a Safer Driver</h3>-->
+<!--                            <p class="Blog__item-text Blog__item-text-1">-->
+<!--                                Although the 2020 lockdown resulted in a 49..47% fall in the number of lives lost in road accidents (April - June, as compared to numbers from 2019) [source], the fact remains that there's still a lot of effort required. To make that happen, one must become a responsible driver and inculcate driving practices that help maintain safety for one and all on the road.-->
+
+<!--                                Driving is an art that needs to be mastered with focus and discipline. Whether you are a new driver who wants to learn how to drive a car or among the experienced drivers who want to brush up their skills, choosing a professional driving school is always a good idea.-->
+
+<!--                                Helping you master safe and responsible driving, Maruti Suzuki Driving Schools are equipped with the best-in-class facilities, expert trainers, a well-balanced curriculum, and much more, which makes the learning experience even more amazing.-->
+
+<!--                                Let's get to the tips that can help you become a safer driver: - -->
+<!--                            </p>-->
+<!--                            <div class="Blog__item-bottom"><a href="./blog_info.html" class="Blog__item-link">Read more</a>-->
+<!--                                <div class="Blog__item-auth">-->
+<!--                                    <div class="Blog__item-user">Zalkar</div>-->
+<!--                                    <div class="Blog__item-date">22.03.2022</div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="Blog__item">-->
+<!--                        <div class="Blog__item-img-wrapper">-->
+<!--                            <img src="../images/safe.jpg" alt="article img" class="Blog__item-img">-->
+<!--                        </div>-->
+<!--                        <div class="Blog__item-info">-->
+<!--                            <h3 class="Blog__item-title">10 Practices That Make You a Safer Driver</h3>-->
+<!--                            <p class="Blog__item-text Blog__item-text-1">-->
+<!--                                Although the 2020 lockdown resulted in a 49..47% fall in the number of lives lost in road accidents (April - June, as compared to numbers from 2019) [source], the fact remains that there's still a lot of effort required. To make that happen, one must become a responsible driver and inculcate driving practices that help maintain safety for one and all on the road.-->
+
+<!--                                Driving is an art that needs to be mastered with focus and discipline. Whether you are a new driver who wants to learn how to drive a car or among the experienced drivers who want to brush up their skills, choosing a professional driving school is always a good idea.-->
+
+<!--                                Helping you master safe and responsible driving, Maruti Suzuki Driving Schools are equipped with the best-in-class facilities, expert trainers, a well-balanced curriculum, and much more, which makes the learning experience even more amazing.-->
+
+<!--                                Let's get to the tips that can help you become a safer driver: - -->
+<!--                            </p>-->
+<!--                            <div class="Blog__item-bottom"><a href="./blog_info.html" class="Blog__item-link">Read more</a>-->
+<!--                                <div class="Blog__item-auth">-->
+<!--                                    <div class="Blog__item-user">Zalkar</div>-->
+<!--                                    <div class="Blog__item-date">22.03.2022</div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="Blog__item">-->
+<!--                        <div class="Blog__item-img-wrapper">-->
+<!--                            <img src="../images/safe.jpg" alt="article img" class="Blog__item-img">-->
+<!--                        </div>-->
+<!--                        <div class="Blog__item-info">-->
+<!--                            <h3 class="Blog__item-title">10 Practices That Make You a Safer Driver</h3>-->
+<!--                            <p class="Blog__item-text Blog__item-text-1">-->
+<!--                                Although the 2020 lockdown resulted in a 49..47% fall in the number of lives lost in road accidents (April - June, as compared to numbers from 2019) [source], the fact remains that there's still a lot of effort required. To make that happen, one must become a responsible driver and inculcate driving practices that help maintain safety for one and all on the road.-->
+
+<!--                                Driving is an art that needs to be mastered with focus and discipline. Whether you are a new driver who wants to learn how to drive a car or among the experienced drivers who want to brush up their skills, choosing a professional driving school is always a good idea.-->
+
+<!--                                Helping you master safe and responsible driving, Maruti Suzuki Driving Schools are equipped with the best-in-class facilities, expert trainers, a well-balanced curriculum, and much more, which makes the learning experience even more amazing.-->
+
+<!--                                Let's get to the tips that can help you become a safer driver: - -->
+<!--                            </p>-->
+<!--                            <div class="Blog__item-bottom"><a href="./blog_info.html" class="Blog__item-link">Read more</a>-->
+<!--                                <div class="Blog__item-auth">-->
+<!--                                    <div class="Blog__item-user">Zalkar</div>-->
+<!--                                    <div class="Blog__item-date">22.03.2022</div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="Blog__item">-->
+<!--                        <div class="Blog__item-img-wrapper">-->
+<!--                            <img src="../images/safe.jpg" alt="article img" class="Blog__item-img">-->
+<!--                        </div>-->
+<!--                        <div class="Blog__item-info">-->
+<!--                            <h3 class="Blog__item-title">10 Practices That Make You a Safer Driver</h3>-->
+<!--                            <p class="Blog__item-text Blog__item-text-1">-->
+<!--                                Although the 2020 lockdown resulted in a 49..47% fall in the number of lives lost in road accidents (April - June, as compared to numbers from 2019) [source], the fact remains that there's still a lot of effort required. To make that happen, one must become a responsible driver and inculcate driving practices that help maintain safety for one and all on the road.-->
+
+<!--                                Driving is an art that needs to be mastered with focus and discipline. Whether you are a new driver who wants to learn how to drive a car or among the experienced drivers who want to brush up their skills, choosing a professional driving school is always a good idea.-->
+
+<!--                                Helping you master safe and responsible driving, Maruti Suzuki Driving Schools are equipped with the best-in-class facilities, expert trainers, a well-balanced curriculum, and much more, which makes the learning experience even more amazing.-->
+
+<!--                                Let's get to the tips that can help you become a safer driver: - -->
+<!--                            </p>-->
+<!--                            <div class="Blog__item-bottom"><a href="./blog_info.html" class="Blog__item-link">Read more</a>-->
+<!--                                <div class="Blog__item-auth">-->
+<!--                                    <div class="Blog__item-user">Zalkar</div>-->
+<!--                                    <div class="Blog__item-date">22.03.2022</div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer__inner">
+                <div class="footer__column">
+                    <a href="{% url 'home' %}" class="footer__logo logo">
+                        First Class
+                    </a>
+                </div>
+                <div class="footer__column">
+                    <h3 class="footer__column-title">Main links</h3>
+                    <a href="{% url 'about_us' %}" class="footer__column-link">about us</a>
+                    <a href="{% url 'instructors' %}" class="footer__column-link">instructors</a>
+                    <a href="{% url 'courses' %}" class="footer__column-link">courses</a>
+                    <a href="./traffic_laws.html" class="footer__column-link">traffic laws</a>
+                </div>
+                <div class="footer__column">
+                    <h3 class="footer__column-title">Useful links</h3>
+                    <a href="/login/" class="footer__column-link">login</a>
+                    <a href="{% url 'contacts' %}" class="footer__column-link">contacts</a>
+                    <a href="{% url 'blogs' %}" class="footer__column-link">blog</a>
+                    <a href="{% url 'frequently_asked_questions' %}" class="footer__column-link">FAQs</a>
+                </div>
+                <div class="footer__column socials">
+                    <h3 class="footer__column-title socials__ешеду">Follow us:</h3>
+                    <ul class="socials__list">
+                        <li class="socials__item">
+                            <a href="https://instagram.com" class="footer__column-link socials__link">
+                               <?xml version="1.0" encoding="utf-8"?>
+                                <!-- Uploaded to SVGRepo https://www.svgrepo.com -->
+                                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+                                    viewBox="0 0 260 260" enable-background="new 0 0 260 260" xml:space="preserve">
+                                <path d="M164.58,64H95.42C78.1,64,64,78.1,64,95.42v69.16C64,181.9,78.1,196,95.42,196h69.16c17.32,0,31.42-14.1,31.42-31.42V95.42
+                                    C196,78.1,181.9,64,164.58,64z M130,171.1c-22.66,0-41.1-18.44-41.1-41.1s18.44-41.1,41.1-41.1s41.1,18.44,41.1,41.1
+                                    S152.66,171.1,130,171.1z M172.22,97.3c-5.3,0-9.6-4.3-9.6-9.61c0-5.3,4.3-9.6,9.6-9.6c5.31,0,9.61,4.3,9.61,9.6
+                                    C181.83,93,177.53,97.3,172.22,97.3z M130,102.9c-14.94,0-27.1,12.16-27.1,27.1s12.16,27.1,27.1,27.1s27.1-12.16,27.1-27.1
+                                    S144.94,102.9,130,102.9z M130,2C59.31,2,2,59.31,2,130s57.31,128,128,128s128-57.31,128-128S200.69,2,130,2z M210,164.58
+                                    c0,25.04-20.38,45.42-45.42,45.42H95.42C70.38,210,50,189.62,50,164.58V95.42C50,70.38,70.38,50,95.42,50h69.16
+                                    C189.62,50,210,70.38,210,95.42V164.58z" fill="#fff"/>
+                                </svg>
+                            </a>
+                        </li>
+                        <li class="socials__item">
+                            <a href="https://facebook.com" class="footer__column-link socials__link">
+                                <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 .4C4.698.4.4 4.698.4 10s4.298 9.6 9.6 9.6 9.6-4.298 9.6-9.6S15.302.4 10 .4zm2.274 6.634h-1.443c-.171 0-.361.225-.361.524V8.6h1.805l-.273 1.486H10.47v4.461H8.767v-4.461H7.222V8.6h1.545v-.874c0-1.254.87-2.273 2.064-2.273h1.443v1.581z" fill="#fff"/></svg>
+                            </a>
+                        </li>
+                        <li class="socials__item">
+                            <a href="https://twitter.com" class="footer__column-link socials__link">
+                                <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 .4C4.698.4.4 4.698.4 10s4.298 9.6 9.6 9.6 9.6-4.298 9.6-9.6S15.302.4 10 .4zm3.905 7.864c.004.082.005.164.005.244 0 2.5-1.901 5.381-5.379 5.381a5.335 5.335 0 0 1-2.898-.85c.147.018.298.025.451.025.886 0 1.701-.301 2.348-.809a1.895 1.895 0 0 1-1.766-1.312 1.9 1.9 0 0 0 .853-.033 1.892 1.892 0 0 1-1.517-1.854v-.023c.255.141.547.227.857.237a1.89 1.89 0 0 1-.585-2.526 5.376 5.376 0 0 0 3.897 1.977 1.891 1.891 0 0 1 3.222-1.725 3.797 3.797 0 0 0 1.2-.459 1.9 1.9 0 0 1-.831 1.047 3.799 3.799 0 0 0 1.086-.299 3.834 3.834 0 0 1-.943.979z" fill="#fff"/></svg>
+                            </a>
+                        </li>
+                        <li class="socials__item">
+                            <a href="https://youtube.com" class="footer__column-link socials__link">
+                                <svg viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M11.603 9.833L9.357 8.785C9.161 8.694 9 8.796 9 9.013v1.974c0 .217.161.319.357.228l2.245-1.048c.197-.092.197-.242.001-.334zM10 .4C4.698.4.4 4.698.4 10s4.298 9.6 9.6 9.6 9.6-4.298 9.6-9.6S15.302.4 10 .4zm0 13.5c-4.914 0-5-.443-5-3.9s.086-3.9 5-3.9 5 .443 5 3.9-.086 3.9-5 3.9z" fill="#fff"/></svg>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <p class="footer__privesy">Copyright 2022 First Class Driving School</p>
+        </div>
+    </footer>
+</body>
+</html>

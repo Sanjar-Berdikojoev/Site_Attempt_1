@@ -35,5 +35,7 @@ urlpatterns = [
     path('courses/<int:id>/courses_info', views.CoursesDetailView.as_view(), name='courses_info'),
     path('instructors/', views.InstructorsView.as_view(), name='instructors'),
     path('instructors/<int:id>/instructors_info', views.InstructorsDetailView.as_view(), name='instructors_info'),
+    path('blogs/', views.BlogsView.as_view(), name='blogs'),
+    path('blogs/<int:id>/blogs_info', views.BlogsDetailView.as_view(), name='blogs_info'),
     path('frequently_asked_questions/', views.FAQView.as_view(), name='frequently_asked_questions'),
 ]

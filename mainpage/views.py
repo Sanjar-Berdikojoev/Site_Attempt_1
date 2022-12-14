@@ -82,7 +82,7 @@ class InstructorUpdateView(generic.UpdateView):
 
 
 class InstructorDeleteView(generic.CreateView):
-    template_name = 'instructor_create.html'
+    template_name = 'models_delete.html'
     form_class = forms.InstructorForm
     queryset = models.Instructor.objects.all()
     success_url = 'http://127.0.0.1:8000/'
@@ -344,3 +344,17 @@ class InstructorsDetailView(generic.DetailView):
         instructor_id = self.kwargs.get('id')
         return get_object_or_404(models.Instructor, id=instructor_id)
 
+
+class BlogsView(generic.ListView):
+    template_name = 'blog.html'
+    queryset = models.Blog.objects.all()
+
+    def get_queryset(self):
+        return models.Blog.objects.all()
+
+class BlogsDetailView(generic.DetailView):
+    template_name = 'blog_info.html'
+
+    def get_object(self, **kwargs):
+        blog_id = self.kwargs.get('id')
+        return get_object_or_404(models.Blog, id=blog_id)

@@ -39,6 +39,8 @@ class Blog(models.Model):
     description = models.TextField()
     created_date = models.DateTimeField(auto_now_add=True)
     extended_description = models.TextField()
+    extended_description_2 = models.TextField(null=True)
+    user = models.CharField(max_length=100 , null=True)
 
     def __str__(self):
         return self.title

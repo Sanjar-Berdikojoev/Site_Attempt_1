@@ -37,7 +37,7 @@
                                         <a href="{% url 'instructors' %}" class="navbar__link">Instructors</a>
                                     </li>
                                     <li class="navbar__item">
-                                        <a href="./blog.html" class="navbar__link">Blog</a>
+                                        <a href="{% url 'blogs' %}" class="navbar__link">Blog</a>
                                     </li>
                                     <li class="navbar__item">
                                         <a href="{% url 'frequently_asked_questions' %}" class="navbar__link">FAQs</a>
@@ -50,7 +50,7 @@
                                     </li>
 {% if request.user.is_superuser %}
                                     <li class="navbar__item">
-                                      <a class="admin_panel_button" href="/admin_panel">Admin Panel</a>
+                                      <a class="navbar__link" href="/admin">Admin Panel</a>
                                     </li>
 
                                         {% endif %}
@@ -219,7 +219,7 @@
                     <h3 class="footer__column-title">Useful links</h3>
                     <a href="/login/" class="footer__column-link">login</a>
                     <a href="{% url 'contacts' %}" class="footer__column-link">contacts</a>
-                    <a href="./blog.html" class="footer__column-link">blog</a>
+                    <a href="{% url 'blogs' %}" class="footer__column-link">blog</a>
                     <a href="{% url 'frequently_asked_questions' %}" class="footer__column-link">FAQs</a>
                 </div>
                 <div class="footer__column socials">

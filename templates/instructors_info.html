@@ -201,12 +201,10 @@
                             <div class="general-experience property">General experience: <span class="experience-number value">{{instructor.general_experience}}</span></div>
                             <div class="teaching-experience property">Teaching experience: <span class="experience-number value">{{instructor.teaching_experience}}</span></div>
                         </div>
-                        <div class="instructorsinfo__card-category property">Teaching category: <span class="category value">{{i.teaching_category}}</span></div>
+                        <div class="instructorsinfo__card-category property">Teaching category: <span class="category value">{{instructor.teaching_category}}</span></div>
                         <div class="instructorsinfo__card-car driving-car property">Driving car: <sapn class="value car-model">{{instructor.driving_car}}</sapn></div>
                         <div class="instructorsinfo__card-number property">Phone number: <span class="instructor-number value"><a href="tel:+996777789564">{{instructor.phone_number}}</a></span></div>
-                        <p class="instructorsinfo__card-text">
-                            Young but not inexperienced instructor. Due to the fact that many students of our driving school are young people, it is easy for him to find a common language with them and find an individual approach to everyone.
-                        </p>
+                        <p class="instructorsinfo__card-text">{{instructor.description}}</p>
                     </div>
                 </div>
             </div>

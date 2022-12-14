@@ -23,12 +23,7 @@ class NewLoginForm(LoginView):
     def get_success_url(self):
         return reverse("home")
 
-class UserListView(ListView):
-    queryset = User.objects.all()
-    template_name = 'user_list.html'
 
-    def get_queryset(self):
-        return User.objects.all()
 @login_required(login_url='sign-in')
 def logout_user(request):
     logout(request)
@@ -55,5 +50,3 @@ def sign_in(request):
             messages.error(request, 'Not correct')
 
     return render(request, 'login.html', {'page': page})
-# def register_all(request):
-#     return render(request, 'register.html')

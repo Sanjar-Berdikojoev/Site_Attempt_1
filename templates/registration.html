@@ -18,7 +18,7 @@
             <div class="form-container sign-up-container register__container">
                 <form method="post">
                     <h1>Register</h1>
-                    <span>create new account</span>
+                    <span>Create new account</span>
                     {% csrf_token %}
                         <input type="text" placeholder="Name"{{form.username}}<br>
                         <input type="password" placeholder="Password"{{form.password1}}<br>
@@ -43,7 +43,6 @@
         </div>
     </section>
 
-<!--    <script src="{% static 'js/login.js' %}"></script>-->
 </body>
 
 </html>

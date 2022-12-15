@@ -15,7 +15,7 @@
         <div class="header__top">
             <div class="container">
                 <div class="header__top-inner">
-                    <a href="{% url 'home' %}" class="header__logo logo">
+                    <a href="../index.html" class="header__logo logo">
                         First Class
                     </a>
                     <div class="header__menu menu">
@@ -78,7 +78,7 @@
                     <a href="{% url 'home' %}" class="breadcrumb__link">Home</a>
                 </li>
                 <li class="breadcrumb__item">
-                    <a href="{% url 'blogs' %}" class="breadcrumb__link">Blog</a>
+                    <a href="#" class="breadcrumb__link">Blog</a>
                 </li>
             </ul>
         </div>
@@ -89,6 +89,9 @@
             <div class="container">
                 <h1 class="Blog__title">Blog</h1>
                 <div class="Blog__content">
+                    {% if request.user.is_authenticated%}
+                <button class="Blog__add"><a href="/blog/create">Add Article</a></button>
+                {% endif %}
                     {% for i in object_list %}
                     <div class="Blog__item">
                         <div class="Blog__item-img-wrapper">
@@ -96,9 +99,7 @@
                         </div>
                         <div class="Blog__item-info">
                             <h3 class="Blog__item-title">{{i.title}}</h3>
-                            <p class="Blog__item-text Blog__item-text-1">
-                                {{i.description}}
-                            </p>
+                            <p class="Blog__item-text Blog__item-text-1">{{i.description}}</p>
                             <div class="Blog__item-bottom"><a href="{{i.id}}/blogs_info" class="Blog__item-link">Read more</a>
                                 <div class="Blog__item-auth">
                                     <div class="Blog__item-user">{{i.user}}</div>
@@ -108,123 +109,8 @@
                         </div>
                     </div>
                     {% endfor %}
-<!--                    <div class="Blog__item">-->
-<!--                        <div class="Blog__item-img-wrapper">-->
-<!--                            <img src="../images/safe.jpg" alt="article img" class="Blog__item-img">-->
-<!--                        </div>-->
-<!--                        <div class="Blog__item-info">-->
-<!--                            <h3 class="Blog__item-title">10 Practices That Make You a Safer Driver</h3>-->
-<!--                            <p class="Blog__item-text Blog__item-text-1">-->
-<!--                                Although the 2020 lockdown resulted in a 49..47% fall in the number of lives lost in road accidents (April - June, as compared to numbers from 2019) [source], the fact remains that there's still a lot of effort required. To make that happen, one must become a responsible driver and inculcate driving practices that help maintain safety for one and all on the road.-->
-
-<!--                                Driving is an art that needs to be mastered with focus and discipline. Whether you are a new driver who wants to learn how to drive a car or among the experienced drivers who want to brush up their skills, choosing a professional driving school is always a good idea.-->
-
-<!--                                Helping you master safe and responsible driving, Maruti Suzuki Driving Schools are equipped with the best-in-class facilities, expert trainers, a well-balanced curriculum, and much more, which makes the learning experience even more amazing.-->
-
-<!--                                Let's get to the tips that can help you become a safer driver: - -->
-<!--                            </p>-->
-<!--                            <div class="Blog__item-bottom"><a href="./blog_info.html" class="Blog__item-link">Read more</a>-->
-<!--                                <div class="Blog__item-auth">-->
-<!--                                    <div class="Blog__item-user">Zalkar</div>-->
-<!--                                    <div class="Blog__item-date">22.03.2022</div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="Blog__item">-->
-<!--                        <div class="Blog__item-img-wrapper">-->
-<!--                            <img src="../images/safe.jpg" alt="article img" class="Blog__item-img">-->
-<!--                        </div>-->
-<!--                        <div class="Blog__item-info">-->
-<!--                            <h3 class="Blog__item-title">10 Practices That Make You a Safer Driver</h3>-->
-<!--                            <p class="Blog__item-text Blog__item-text-1">-->
-<!--                                Although the 2020 lockdown resulted in a 49..47% fall in the number of lives lost in road accidents (April - June, as compared to numbers from 2019) [source], the fact remains that there's still a lot of effort required. To make that happen, one must become a responsible driver and inculcate driving practices that help maintain safety for one and all on the road.-->
-
-<!--                                Driving is an art that needs to be mastered with focus and discipline. Whether you are a new driver who wants to learn how to drive a car or among the experienced drivers who want to brush up their skills, choosing a professional driving school is always a good idea.-->
-
-<!--                                Helping you master safe and responsible driving, Maruti Suzuki Driving Schools are equipped with the best-in-class facilities, expert trainers, a well-balanced curriculum, and much more, which makes the learning experience even more amazing.-->
-
-<!--                                Let's get to the tips that can help you become a safer driver: - -->
-<!--                            </p>-->
-<!--                            <div class="Blog__item-bottom"><a href="./blog_info.html" class="Blog__item-link">Read more</a>-->
-<!--                                <div class="Blog__item-auth">-->
-<!--                                    <div class="Blog__item-user">Zalkar</div>-->
-<!--                                    <div class="Blog__item-date">22.03.2022</div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="Blog__item">-->
-<!--                        <div class="Blog__item-img-wrapper">-->
-<!--                            <img src="../images/safe.jpg" alt="article img" class="Blog__item-img">-->
-<!--                        </div>-->
-<!--                        <div class="Blog__item-info">-->
-<!--                            <h3 class="Blog__item-title">10 Practices That Make You a Safer Driver</h3>-->
-<!--                            <p class="Blog__item-text Blog__item-text-1">-->
-<!--                                Although the 2020 lockdown resulted in a 49..47% fall in the number of lives lost in road accidents (April - June, as compared to numbers from 2019) [source], the fact remains that there's still a lot of effort required. To make that happen, one must become a responsible driver and inculcate driving practices that help maintain safety for one and all on the road.-->
-
-<!--                                Driving is an art that needs to be mastered with focus and discipline. Whether you are a new driver who wants to learn how to drive a car or among the experienced drivers who want to brush up their skills, choosing a professional driving school is always a good idea.-->
-
-<!--                                Helping you master safe and responsible driving, Maruti Suzuki Driving Schools are equipped with the best-in-class facilities, expert trainers, a well-balanced curriculum, and much more, which makes the learning experience even more amazing.-->
-
-<!--                                Let's get to the tips that can help you become a safer driver: - -->
-<!--                            </p>-->
-<!--                            <div class="Blog__item-bottom"><a href="./blog_info.html" class="Blog__item-link">Read more</a>-->
-<!--                                <div class="Blog__item-auth">-->
-<!--                                    <div class="Blog__item-user">Zalkar</div>-->
-<!--                                    <div class="Blog__item-date">22.03.2022</div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="Blog__item">-->
-<!--                        <div class="Blog__item-img-wrapper">-->
-<!--                            <img src="../images/safe.jpg" alt="article img" class="Blog__item-img">-->
-<!--                        </div>-->
-<!--                        <div class="Blog__item-info">-->
-<!--                            <h3 class="Blog__item-title">10 Practices That Make You a Safer Driver</h3>-->
-<!--                            <p class="Blog__item-text Blog__item-text-1">-->
-<!--                                Although the 2020 lockdown resulted in a 49..47% fall in the number of lives lost in road accidents (April - June, as compared to numbers from 2019) [source], the fact remains that there's still a lot of effort required. To make that happen, one must become a responsible driver and inculcate driving practices that help maintain safety for one and all on the road.-->
-
-<!--                                Driving is an art that needs to be mastered with focus and discipline. Whether you are a new driver who wants to learn how to drive a car or among the experienced drivers who want to brush up their skills, choosing a professional driving school is always a good idea.-->
-
-<!--                                Helping you master safe and responsible driving, Maruti Suzuki Driving Schools are equipped with the best-in-class facilities, expert trainers, a well-balanced curriculum, and much more, which makes the learning experience even more amazing.-->
-
-<!--                                Let's get to the tips that can help you become a safer driver: - -->
-<!--                            </p>-->
-<!--                            <div class="Blog__item-bottom"><a href="./blog_info.html" class="Blog__item-link">Read more</a>-->
-<!--                                <div class="Blog__item-auth">-->
-<!--                                    <div class="Blog__item-user">Zalkar</div>-->
-<!--                                    <div class="Blog__item-date">22.03.2022</div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
-<!--                    <div class="Blog__item">-->
-<!--                        <div class="Blog__item-img-wrapper">-->
-<!--                            <img src="../images/safe.jpg" alt="article img" class="Blog__item-img">-->
-<!--                        </div>-->
-<!--                        <div class="Blog__item-info">-->
-<!--                            <h3 class="Blog__item-title">10 Practices That Make You a Safer Driver</h3>-->
-<!--                            <p class="Blog__item-text Blog__item-text-1">-->
-<!--                                Although the 2020 lockdown resulted in a 49..47% fall in the number of lives lost in road accidents (April - June, as compared to numbers from 2019) [source], the fact remains that there's still a lot of effort required. To make that happen, one must become a responsible driver and inculcate driving practices that help maintain safety for one and all on the road.-->
-
-<!--                                Driving is an art that needs to be mastered with focus and discipline. Whether you are a new driver who wants to learn how to drive a car or among the experienced drivers who want to brush up their skills, choosing a professional driving school is always a good idea.-->
-
-<!--                                Helping you master safe and responsible driving, Maruti Suzuki Driving Schools are equipped with the best-in-class facilities, expert trainers, a well-balanced curriculum, and much more, which makes the learning experience even more amazing.-->
-
-<!--                                Let's get to the tips that can help you become a safer driver: - -->
-<!--                            </p>-->
-<!--                            <div class="Blog__item-bottom"><a href="./blog_info.html" class="Blog__item-link">Read more</a>-->
-<!--                                <div class="Blog__item-auth">-->
-<!--                                    <div class="Blog__item-user">Zalkar</div>-->
-<!--                                    <div class="Blog__item-date">22.03.2022</div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                    </div>-->
+                    </div>
                 </div>
-            </div>
         </section>
     </main>
 
@@ -241,7 +127,7 @@
                     <a href="{% url 'about_us' %}" class="footer__column-link">about us</a>
                     <a href="{% url 'instructors' %}" class="footer__column-link">instructors</a>
                     <a href="{% url 'courses' %}" class="footer__column-link">courses</a>
-                    <a href="./traffic_laws.html" class="footer__column-link">traffic laws</a>
+                    <a href="{% url 'traffic_laws' %}" class="footer__column-link">traffic laws</a>
                 </div>
                 <div class="footer__column">
                     <h3 class="footer__column-title">Useful links</h3>

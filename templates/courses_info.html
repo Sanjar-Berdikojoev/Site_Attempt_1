@@ -93,11 +93,11 @@
                 <div class="coursesinfo__inner">
                     <div class="coursesinfo__category">
                         <div class="coursesinfo__category-title">
-                            <div class="coursesinfo__category-letter">{{object.category_letter}}</div>
-                            <div class="coursesinfo__category-name">{{object.title}} license</div>
+                            <div class="coursesinfo__category-letter">{{course.category_letter}}</div>
+                            <div class="coursesinfo__category-name">{{course.title}} license</div>
                         </div>
                         <div class="coursesinfo__img-wrapper">
-                            <img src="{{object.image.url}}" alt="car" class="coursesinfo__img">
+                            <img src="{{course.image.url}}" alt="car" class="coursesinfo__img">
                         </div>
                     </div>
                     <div class="coursesinfo__desc">
@@ -105,13 +105,13 @@
                         <p class="coursesinfo__desc-text">
                             Theoretical course + package of documents
                         </p>
-                        <p class="coursesinfo__desc-price">{{object.price}} KGS</p>
-                        <p class="coursesinfo__desc-age">required age: {{object.age}}</p>
+                        <p class="coursesinfo__desc-price">{{course.price}} KGS</p>
+                        <p class="coursesinfo__desc-age">required age: {{course.age}}</p>
                     </div>
                     <div class="coursesinfo__driving">
                         <h3 class="coursesinfo__driving-subtitle">ADDITIONAL DRIVING CLASSES</h3>
                         <p class="coursesinfo__driving-price">
-                            60 minutes: {{object.practice}} KGS
+                            60 minutes: {{course.practice}} KGS
                         </p>
                         <p class="coursesinfo__driving-text">
                             driving course includes counter-emergency training
@@ -161,26 +161,31 @@
 
         <section class="modal hidden">
             <div class="flex">
+                <form method="POST">
               <button class="btn-close">⨉</button>
             </div>
             <div>
-              <h3>Sign up for trainig</h3>
+              <h3>Sign up for training</h3>
               <p>
                 Leave an application for registration to our course, we will check it and send you an answer
               </p>
             </div>
-            <input type="text" placeholder="Your name">
-            <input type="text" placeholder="Your surname">
-            <input type="number" placeholder="Your phone number">
-            <input type="number" placeholder="Your age">
-            <input type="email" placeholder="Your email">
-            <button class="btn">Sign up</button>
+            {% csrf_token %}
+            {{course_applying_form.name}}
+            {{course_applying_form.surname}}
+            {{course_applying_form.phone_number}}
+            {{course_applying_form.age}}
+            {{course_applying_form.email}}
+            <div class="btn">Choose the category</div>
+            {{course_applying_form.category_choice}}
+            <button class="btn" type="submit" value="add">Sign up</button>
+            </form>
           </section>
 
           <div class="overlay hidden"></div>
     </main>
 
-    <footer class="footer">
+     <footer class="footer">
         <div class="container">
             <div class="footer__inner">
                 <div class="footer__column">
@@ -193,7 +198,7 @@
                     <a href="{% url 'about_us' %}" class="footer__column-link">about us</a>
                     <a href="{% url 'instructors' %}" class="footer__column-link">instructors</a>
                     <a href="{% url 'courses' %}" class="footer__column-link">courses</a>
-                    <a href="./traffic_laws.html" class="footer__column-link">traffic laws</a>
+                    <a href="{% url 'traffic_laws' %}" class="footer__column-link">traffic laws</a>
                 </div>
                 <div class="footer__column">
                     <h3 class="footer__column-title">Useful links</h3>
@@ -242,6 +247,6 @@
             <p class="footer__privesy">Copyright 2022 First Class Driving School</p>
         </div>
     </footer>
-    <script src="../js/modal.js"></script>
+    <script src="{% static 'js/modal.js' %}"></script>
 </body>
 </html>

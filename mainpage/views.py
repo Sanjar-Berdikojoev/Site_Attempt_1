@@ -1,7 +1,11 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from . import models, forms
 from django.views import generic
 import numpy as np
+from .forms import CommentForm, Apply_For_JobForm, Apply_For_CourseForm
+
+def error_404(request, exception):
+    return render(request, '404.html')
 
 def mainpage_all(request):
     instructor = models.Instructor.objects.order_by('id')[:5]
@@ -20,44 +24,8 @@ def mainpage_all(request):
     }
     return render(request, 'index.html', context)
 
-def admin_panel_all(request):
-    instructor = models.Instructor.objects.all()
-    course = models.Course.objects.all()
-    blogs = models.Blog.objects.all()
-    traffic_laws = models.Traffic_Law.objects.all()
-    advantages = models.Advantages.objects.all()
-    frequently_asked_questions = models.Frequently_Asked_Questions.objects.all()
-    context = {
-        'instructor':instructor,
-        'course': course,
-        'blogs': blogs,
-        'traffic_laws': traffic_laws,
-        'advantages': advantages,
-        'frequently_asked_questions': frequently_asked_questions,
-    }
-    return render(request, 'admin_panel.html', context)
-
-def instructor_extended_info(request, id):
-    instructor = models.Instructor.objects.get(id=id)
-    comment = instructor.post.all()
-    context = {
-        'instructor': instructor,
-        'comment': comment,
-    }
-    return render(request, 'instructor_extended_info.html', context)
-
-def course_extended_info(request, id):
-    course = models.Course.objects.get(id=id)
-    return render(request, 'course_extended_info.html', {'course': course})
-
-def blogs_extended_info(request, id):
-    blogs = models.Blog.objects.get(id=id)
-    return render(request, 'blogs_extended_info.html', {'blogs': blogs})
-
-def traffic_laws_extended_info(request, id):
-    traffic_laws = models.Traffic_Law.objects.get(id=id)
-    return render(request, 'traffic_laws_extended_info.html', {'traffic_laws': traffic_laws})
-
+def application_success(request):
+    return render(request, 'success.html')
 
 class InstructorCreateView(generic.CreateView):
     template_name = 'models_create.html'
@@ -73,7 +41,7 @@ class InstructorCreateView(generic.CreateView):
 class InstructorUpdateView(generic.UpdateView):
     template_name = 'models_update.html'
     form_class = forms.InstructorForm
-    success_url = 'http://127.0.0.1:8000/'
+    success_url = 'http://127.0.0.1:8000'
 
 
     def get_object(self, **kwargs):
@@ -81,49 +49,17 @@ class InstructorUpdateView(generic.UpdateView):
         return get_object_or_404(models.Instructor, id=course_id)
 
 
-class InstructorDeleteView(generic.CreateView):
+class InstructorDeleteView(generic.DeleteView):
     template_name = 'models_delete.html'
     form_class = forms.InstructorForm
     queryset = models.Instructor.objects.all()
-    success_url = 'http://127.0.0.1:8000/'
+    success_url = 'http://127.0.0.1:8000'
+    slug_field = 'product_slug'
+    slug_url_kwarg = 'product_slug'
 
     def form_valid(self, form):
         print(form.cleaned_data)
         return super(InstructorDeleteView, self).form_valid(form=form)
-
-
-
-class CourseCreateView(generic.CreateView):
-    template_name = 'models_create.html'
-    form_class = forms.CourseForm
-    queryset = models.Course.objects.all()
-    success_url = 'http://127.0.0.1:8000/'
-
-    def form_valid(self, form):
-        print(form.cleaned_data)
-        return super(CourseCreateView, self).form_valid(form=form)
-
-
-class CourseUpdateView(generic.UpdateView):
-    template_name = 'models_update.html'
-    form_class = forms.CourseForm
-    success_url = 'http://127.0.0.1:8000/'
-
-    def get_object(self, **kwargs):
-        course_id = self.kwargs.get('id')
-        return get_object_or_404(models.Course, id=course_id)
-
-    def form_valid(self, form):
-        return super(CourseUpdateView, self).form_valid(form=form)
-
-
-class CourseDeleteView(generic.DeleteView):
-    template_name = 'models_delete.html'
-    success_url = 'http://127.0.0.1:8000/'
-
-    def get_object(self, **kwargs):
-        course_id = self.kwargs.get('id')
-        return get_object_or_404(models.Course, id=course_id)
 
 
 class BlogCreateView(generic.CreateView):
@@ -159,153 +95,13 @@ class BlogDeleteView(generic.DeleteView):
         return get_object_or_404(models.Blog, id=blog_id)
 
 
-class Traffic_LawCreateView(generic.CreateView):
-    template_name = 'models_create.html'
-    form_class = forms.Traffic_LawForm
-    queryset = models.Traffic_Law.objects.all()
-    success_url = 'http://127.0.0.1:8000/'
+class CommentView(generic.ListView):
+    template_name = 'instructors_info.html'
+    queryset = models.Comment.objects.all()
 
-    def form_valid(self, form):
-        print(form.cleaned_data)
-        return super(Traffic_LawCreateView, self).form_valid(form=form)
+    def get_queryset(self):
+        return models.Comment.objects.all()
 
-
-class Traffic_LawUpdateView(generic.UpdateView):
-    template_name = 'models_update.html'
-    form_class = forms.Traffic_LawForm
-    success_url = 'http://127.0.0.1:8000/'
-
-    def get_object(self, **kwargs):
-        traffic_law_id = self.kwargs.get('id')
-        return get_object_or_404(models.Traffic_Law, id=traffic_law_id)
-
-    def form_valid(self, form):
-        return super(Traffic_LawUpdateView, self).form_valid(form=form)
-
-
-class Traffic_LawDeleteView(generic.DeleteView):
-    template_name = 'models_delete.html'
-    success_url = 'http://127.0.0.1:8000/'
-
-    def get_object(self, **kwargs):
-        traffic_law_id = self.kwargs.get('id')
-        return get_object_or_404(models.Traffic_Law, id=traffic_law_id)
-
-
-class Frequently_Asked_QuestionsCreateView(generic.CreateView):
-    template_name = 'models_create.html'
-    form_class = forms.Frequently_Asked_QuestionsForm
-    queryset = models.Frequently_Asked_Questions.objects.all()
-    success_url = 'http://127.0.0.1:8000/'
-
-    def form_valid(self, form):
-        print(form.cleaned_data)
-        return super(Frequently_Asked_QuestionsCreateView, self).form_valid(form=form)
-
-
-class Frequently_Asked_QuestionsUpdateView(generic.UpdateView):
-    template_name = 'models_update.html'
-    form_class = forms.Frequently_Asked_QuestionsForm
-    success_url = 'http://127.0.0.1:8000/'
-
-    def get_object(self, **kwargs):
-        frequently_asked_questions_id = self.kwargs.get('id')
-        return get_object_or_404(models.Frequently_Asked_Questions, id=frequently_asked_questions_id)
-
-    def form_valid(self, form):
-        return super(Frequently_Asked_QuestionsUpdateView, self).form_valid(form=form)
-
-
-class Frequently_Asked_QuestionsDeleteView(generic.DeleteView):
-    template_name = 'models_delete.html'
-    success_url = 'http://127.0.0.1:8000/'
-
-    def get_object(self, **kwargs):
-        frequently_asked_questions_id = self.kwargs.get('id')
-        return get_object_or_404(models.Frequently_Asked_Questions, id=frequently_asked_questions_id)
-
-
-class AdvantagesCreateView(generic.CreateView):
-    template_name = 'models_create.html'
-    form_class = forms.AdvantagesForm
-    queryset = models.Advantages.objects.all()
-    success_url = 'http://127.0.0.1:8000/'
-
-    def form_valid(self, form):
-        print(form.cleaned_data)
-        return super(AdvantagesCreateView, self).form_valid(form=form)
-
-
-class AdvantagesUpdateView(generic.UpdateView):
-    template_name = 'models_update.html'
-    form_class = forms.AdvantagesForm
-    success_url = 'http://127.0.0.1:8000/'
-
-    def get_object(self, **kwargs):
-        advantages_id = self.kwargs.get('id')
-        return get_object_or_404(models.Advantages, id=advantages_id)
-
-    def form_valid(self, form):
-        return super(AdvantagesUpdateView, self).form_valid(form=form)
-
-
-class AdvantagesDeleteView(generic.DeleteView):
-    template_name = 'models_delete.html'
-    success_url = 'http://127.0.0.1:8000/'
-
-    def get_object(self, **kwargs):
-        advantages_id = self.kwargs.get('id')
-        return get_object_or_404(models.Advantages, id=advantages_id)
-
-
-# def instructor_reviews(request):
-#     reviews = models.Instructor_Review.objects.all()
-#     return render(request, 'instructors_extended_info.html', {'reviews': reviews})
-
-def average_rating(self):
-    all_ratings = list(map(lambda x: x.value, self.comments.all()))
-    average = np.array(all_ratings).astype(np.float)
-    return np.average(average)
-
-
-class Instructor_ReviewCreateView(generic.CreateView):
-    template_name = 'models_create.html'
-    form_class = forms.Instructor_ReviewForm
-    queryset = models.Instructor_Review.objects.all()
-    success_url = 'http://127.0.0.1:8000/'
-
-    def form_valid(self, form):
-        print(form.cleaned_data)
-        return super(Instructor_ReviewCreateView, self).form_valid(form=form)
-
-
-class Instructor_ReviewUpdateView(generic.UpdateView):
-    template_name = 'models_update.html'
-    form_class = forms.Instructor_ReviewForm
-    success_url = 'http://127.0.0.1:8000/'
-
-    def get_object(self, **kwargs):
-        instructor_review_id = self.kwargs.get('id')
-        return get_object_or_404(models.Instructor_Review, id=instructor_review_id)
-
-    def form_valid(self, form):
-        return super(Instructor_ReviewUpdateView, self).form_valid(form=form)
-
-
-class Instructor_ReviewDeleteView(generic.DeleteView):
-    template_name = 'models_delete.html'
-    success_url = 'http://127.0.0.1:8000/'
-
-    def get_object(self, **kwargs):
-        instructor_review_id = self.kwargs.get('id')
-        return get_object_or_404(models.Instructor_Review, id=instructor_review_id)
-
-
-def about_us_view(request):
-    return render(request, 'about_us.html')
-
-def contacts_view(request):
-    return render(request, 'contacts.html')
 
 class FAQView(generic.ListView):
     template_name = 'faqs.html'
@@ -322,27 +118,73 @@ class CoursesView(generic.ListView):
     def get_queryset(self):
         return models.Course.objects.all()
 
-class CoursesDetailView(generic.DetailView):
-    template_name = 'courses_info.html'
 
-    def get_object(self, **kwargs):
-        course_id = self.kwargs.get('id')
-        return get_object_or_404(models.Course, id=course_id)
+def instructor_view(request):
+    if request.method == 'POST':
+        form = Apply_For_JobForm(request.POST)
+        if form.is_valid():
+            form.save()
+            redirect('application_success/')
+
+    instructor = models.Instructor.objects.all()
+    job_applying_form = Apply_For_JobForm()
+    context = {
+        'instructor': instructor,
+        'job_applying_form': job_applying_form,
+    }
+
+    return render(request, 'instructors.html', context)
 
 
-class InstructorsView(generic.ListView):
-    template_name = 'instructors.html'
-    queryset = models.Instructor.objects.all()
+def contacts_view(request):
+    if request.method == 'POST':
+        form = Apply_For_JobForm(request.POST)
+        if form.is_valid():
+            form.save()
 
-    def get_queryset(self):
-        return models.Instructor.objects.all()
+    job_applying_form = Apply_For_JobForm()
+    return render(request, 'contacts.html', {'job_applying_form': job_applying_form,})
 
-class InstructorsDetailView(generic.DetailView):
+def instructor_detail(request, id):
+    instructor = models.Instructor.objects.get(id=id)
+    return render(request, 'instructors_info.html', {'instructor': instructor})
+
+class InstructorDetailView(generic.DetailView):
     template_name = 'instructors_info.html'
 
     def get_object(self, **kwargs):
         instructor_id = self.kwargs.get('id')
         return get_object_or_404(models.Instructor, id=instructor_id)
+
+def about_us_view(request):
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            form.save()
+            redirect('application_success/')
+
+    comment = models.Comment.objects.all()
+    comment_form = CommentForm()
+    context = {
+        'comment': comment,
+        'comment_form': comment_form,
+    }
+    return render(request, 'about_us.html', context)
+
+
+def course_detail(request, id):
+    if request.method == 'POST':
+        form = Apply_For_CourseForm(request.POST)
+        if form.is_valid():
+            form.save()
+
+    course = models.Course.objects.get(id=id)
+    course_applying_form = Apply_For_CourseForm()
+    context = {
+        'course': course,
+        'course_applying_form': course_applying_form,
+    }
+    return render(request, 'courses_info.html', context)
 
 
 class BlogsView(generic.ListView):
@@ -358,3 +200,37 @@ class BlogsDetailView(generic.DetailView):
     def get_object(self, **kwargs):
         blog_id = self.kwargs.get('id')
         return get_object_or_404(models.Blog, id=blog_id)
+
+
+def traffic_rules_view(request):
+    traffic_rule = models.Traffic_Rule.objects.all()
+    warning_sign = models.Warning_Signs.objects.all()
+    priority_sign = models.Priotity_Signs.objects.all()
+    prohibition_sign = models.Prohibition_Signs.objects.all()
+    mandatory_sign = models.Mandatory_Signs.objects.all()
+    sign_of_special_regulations = models.Signs_Of_Special_Regulations.objects.all()
+    information_sign = models.Information_Signs.objects.all()
+    service_mark = models.Service_Marks.objects.all()
+    sign_of_additional_information = models.Signs_Of_Additional_Information.objects.all()
+    context = {
+            'traffic_rule': traffic_rule,
+            'warning_sign': warning_sign,
+            'priority_sign': priority_sign,
+            'prohibition_sign': prohibition_sign,
+            'mandatory_sign': mandatory_sign,
+            'sign_of_special_regulations': sign_of_special_regulations,
+            'information_sign': information_sign,
+            'service_mark': service_mark,
+            'sign_of_additional_information': sign_of_additional_information,
+    }
+    return render(request, 'traffic_laws.html', context)
+
+class Traffic_RulesDetailView(generic.DetailView):
+    template_name = 'traffic_laws_info.html'
+
+    def get_object(self, **kwargs):
+        traffic_rule_id = self.kwargs.get('id')
+        return get_object_or_404(models.Traffic_Rule, id=traffic_rule_id)
+
+
+

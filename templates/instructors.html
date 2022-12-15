@@ -87,10 +87,12 @@
     <main class="Instructors">
         <section class="Instructors__list">
             <div class="container">
-                <button class="Instructors__add">Add instructor</button>
+                {% if request.user.is_superuser %}
+                <button class="Instructors__add"><a href="/instructor/create">Add instructor</a></button>
+                {% endif %}
                 <h1 class="Instructors__title">Instructors list</h1>
                 <div class="box">
-                    {% for i in object_list %}
+                    {% for i in instructor %}
                     <div class="card">
                       <div class="imgBx">
                           <img src="{{i.image.url}}" alt="images">
@@ -104,6 +106,7 @@
                 <a href="#" class="Instructors__signup btn-open">join as driving instructor</a>
                 <section class="modal hidden">
                     <div class="flex">
+                        <form method="POST">
                       <button class="btn-close">⨉</button>
                     </div>
                     <div>
@@ -112,11 +115,13 @@
                         Leave an application for registration, we will check it and send you an answer
                       </p>
                     </div>
-                    <input type="text" placeholder="Your name">
-                    <input type="text" placeholder="Your surname">
-                    <input type="number" placeholder="Your phone number">
-                    <input type="email" placeholder="Your email">
-                    <button class="btn">Sign up</button>
+                    {% csrf_token %}
+                    {{job_applying_form.name}}
+                    {{job_applying_form.surname}}
+                    {{job_applying_form.phone_number}}
+                    {{job_applying_form.email}}
+                    <button class="btn" type="submit" value="add">Sign up</button>
+                    </form>
                   </section>
 
                   <div class="overlay hidden"></div>
@@ -124,7 +129,7 @@
         </section>
     </main>
 
-    <footer class="footer">
+     <footer class="footer">
         <div class="container">
             <div class="footer__inner">
                 <div class="footer__column">
@@ -137,7 +142,7 @@
                     <a href="{% url 'about_us' %}" class="footer__column-link">about us</a>
                     <a href="{% url 'instructors' %}" class="footer__column-link">instructors</a>
                     <a href="{% url 'courses' %}" class="footer__column-link">courses</a>
-                    <a href="./traffic_laws.html" class="footer__column-link">traffic laws</a>
+                    <a href="{% url 'traffic_laws' %}" class="footer__column-link">traffic laws</a>
                 </div>
                 <div class="footer__column">
                     <h3 class="footer__column-title">Useful links</h3>
@@ -187,6 +192,6 @@
         </div>
     </footer>
 
-    <script src="../js/modal.js"></script>
+    <script src="{% static 'js/modal.js' %}"></script>
 </body>
 </html>

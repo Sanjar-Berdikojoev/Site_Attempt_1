@@ -158,7 +158,7 @@
                             <div class="slider__slide-img-wrapper">
                                 <img src="{{i.image.url}}" alt="instructor" class="img slider__slide-img">
                             </div>
-                            <h3 class="slider__slide-title"><a href="{{i.id}}/instructor">{{i.title}}</a></h3>
+                            <h3 class="slider__slide-title"><a class="slider__slide-link" href="instructors/{{i.id}}/instructors_info">{{i.title}}</a></h3>
                             <p class="slider__slide-desc">General experience {{i.general_experience}}</p>
                             <p class="slider__slide-desc">Teaching experience {{i.teaching_experience}}</p>
                         </div>
@@ -264,7 +264,7 @@
                         <figcaption class="card__caption">
                           <h2 class="card__title">{{x.title}}</h2>
                           <p class="card__snippet">{{x.description}}</p>
-                          <a href="{{x.id}}/traffic_law" class="card__button">Read more</a>
+                          <a href="/traffic_laws" class="card__button">Read more</a>
                         </figcaption>
                     </figure>
                 </div>

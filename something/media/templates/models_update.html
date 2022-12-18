@@ -1,0 +1,46 @@
+<!--<!DOCTYPE html>-->
+<!--{% load static %}-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <title>Update Model</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="form" >-->
+<!--         <form action="" method="post" enctype="multipart/form-data">-->
+<!--             <h1 class="model_update_title">Update Model</h1>-->
+<!--             {% csrf_token %}-->
+<!--             <a class="model_update_button">{{form.as_p}}</a>-->
+<!--             <input type="submit" value="update">-->
+<!--         </form>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" href="{% static 'https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <title>First Class Driving School</title>
+</head>
+<body>
+    <div class="models__wrapper">
+        <div class="models__content" id="form">
+            <h1 class="models__title">Update Model</h1>
+            <form method="POST" action="" class="models__form" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="text" name="name" placeholder="Name">
+                {{form.as_p}}
+                <textarea name="description" cols="30" rows="10" placeholder="Comment"></textarea>
+                <button type="submit">ADD</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

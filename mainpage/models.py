@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-# Create your models here.
+
 class Instructor(models.Model):
     image = models.ImageField(upload_to='')
     title = models.CharField(max_length=100)
@@ -16,6 +16,7 @@ class Instructor(models.Model):
 
     def __str__(self):
         return self.title
+
 
 class Course(models.Model):
     image = models.ImageField(upload_to='')
@@ -32,6 +33,7 @@ class Course(models.Model):
     def __str__(self):
         return self.title
 
+
 class Blog(models.Model):
     image = models.ImageField(upload_to='')
     title = models.CharField(max_length=100)
@@ -43,6 +45,8 @@ class Blog(models.Model):
 
     def __str__(self):
         return self.title
+
+
 class Traffic_Law(models.Model):
     image = models.ImageField(upload_to='')
     title = models.CharField(max_length=100)
@@ -52,16 +56,20 @@ class Traffic_Law(models.Model):
     def __str__(self):
         return self.title
 
+
 class Frequently_Asked_Questions(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
+
     def __str__(self):
         return self.title
+
 
 class Advantages(models.Model):
     image = models.ImageField(upload_to='')
     title = models.CharField(max_length=100)
     description = models.TextField()
+
     def __str__(self):
         return self.title
 
@@ -84,7 +92,7 @@ class Comment(models.Model):
     status_active = models.BooleanField(default=True)
 
     class Meta:
-        ordering = ('created_date',)
+        ordering = ('-created_date',)
 
     def __str__(self):
         return 'Comment by {}'.format(self.name)
@@ -109,6 +117,7 @@ CATEGORY_CHOICES = (
     ('E', 'E'),
 )
 
+
 class Aplly_For_Course(models.Model):
     name = models.CharField(max_length=100)
     surname = models.CharField(max_length=100)
@@ -124,11 +133,17 @@ class Traffic_Rule(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
 
+    def __str__(self):
+        return self.title
+
 
 class Warning_Signs(models.Model):
     title = models.CharField(max_length=100)
     image = models.ImageField(upload_to='')
     description = models.TextField()
+
+    def __str__(self):
+        return self.title
 
 
 class Priotity_Signs(models.Model):
@@ -136,20 +151,35 @@ class Priotity_Signs(models.Model):
     image = models.ImageField(upload_to='')
     description = models.TextField()
 
+    def __str__(self):
+        return self.title
+
+
 class Prohibition_Signs(models.Model):
     title = models.CharField(max_length=100)
     image = models.ImageField(upload_to='')
     description = models.TextField()
+
+    def __str__(self):
+        return self.title
+
 
 class Mandatory_Signs(models.Model):
     title = models.CharField(max_length=100)
     image = models.ImageField(upload_to='')
     description = models.TextField()
 
+    def __str__(self):
+        return self.title
+
+
 class Signs_Of_Special_Regulations(models.Model):
     title = models.CharField(max_length=100)
     image = models.ImageField(upload_to='')
     description = models.TextField()
+
+    def __str__(self):
+        return self.title
 
 
 class Information_Signs(models.Model):
@@ -157,13 +187,23 @@ class Information_Signs(models.Model):
     image = models.ImageField(upload_to='')
     description = models.TextField()
 
+    def __str__(self):
+        return self.title
+
 
 class Service_Marks(models.Model):
     title = models.CharField(max_length=100)
     image = models.ImageField(upload_to='')
-    description = models.TextField()
+    description = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.title
+
 
 class Signs_Of_Additional_Information(models.Model):
     title = models.CharField(max_length=100)
     image = models.ImageField(upload_to='')
     description = models.TextField()
+
+    def __str__(self):
+        return self.title

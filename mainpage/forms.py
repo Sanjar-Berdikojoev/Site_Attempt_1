@@ -51,7 +51,7 @@ class CommentForm(forms.ModelForm):
             })
         }
 
-class Apply_For_JobForm(forms.ModelForm):
+class Aplly_For_JobForm(forms.ModelForm):
 
     class Meta:
         model = models.Aplly_For_Job
@@ -76,7 +76,7 @@ class Apply_For_JobForm(forms.ModelForm):
         }
 
 
-class Apply_For_CourseForm(forms.ModelForm):
+class Aplly_For_CourseForm(forms.ModelForm):
 
     class Meta:
         model = models.Aplly_For_Course
@@ -107,29 +107,3 @@ class Apply_For_CourseForm(forms.ModelForm):
                 'placeholder': 'Choose category',
             }),
         }
-
-
-
-
-
-
-# <section class="modal hidden">
-#                     <div class="flex">
-#                       <button class="btn-close">⨉</button>
-#                     </div>
-#                     <div>
-#                       <h3>Want to join First Class as a driving instructor?</h3>
-#                       <p>
-#                         Leave an application for registration, we will check it and send you an answer
-#                       </p>
-#                     </div>
-#                     <input type="text" placeholder="Your name">
-#                     <input type="text" placeholder="Your surname">
-#                     <input type="number" placeholder="Your phone number">
-#                     <input type="email" placeholder="Your email">
-#                     <button class="btn">Sign up</button>
-#                   </section>
-#
-#                   <div class="overlay hidden"></div>
-#             </div>
-#         </section>

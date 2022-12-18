@@ -154,30 +154,31 @@
             <div class="container">
                 <div class="reviews__inner">
                     <h3 class="reviews__title">Reviews</h3>
+                    {% if success %}
+                    <p class="comment__successful">Your comment was successfully added</p>
+                    {% endif %}
                     <form method="POST" class="reviews__form">
                         {% csrf_token %}
                         {{comment_form.body}}
-<!--                        <textarea placeholder="Write a comment"  class="reviews__form-field" name="review" id="" cols="30" rows="10" {{comment_form.body}}></textarea>-->
                         <label class="reviews__form-rate">
                             <h4 class="reviews__form-rate-title">Rate us</h4>
                             {{comment_form.rating}}
-<!--                            <select class="reviews__form-select" name="select" {{comment_form.rating}}>-->
-<!--&lt;!&ndash;                                <option class="reviews__form-option" value="Perfect">Perfect</option>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <option class="reviews__form-option" value="Good">Good</option>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <option class="reviews__form-option" value="Normal">Normal</option>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <option class="reviews__form-option" value="Bad">Bad</option>&ndash;&gt;-->
-<!--&lt;!&ndash;                                <option class="reviews__form-option" value="Awful">Awful</option>&ndash;&gt;-->
-<!--                            </select>-->
                         </label>
                         <label class="reviews__form-buttons">
                             <button type="reset" class="reviews__form-button cancel">Cancel</button>
+                            {% if request.user.is_authenticated%}
                             <button type="submit" class="reviews__form-button delete" value="add">Leave review</button>
+                            {% else %}
+                            <a href="#" class="reviews__form-button delete">Leave review</a >
+                            {% endif %}
                         </label>
                     </form>
                     {% for i in comment %}
                     <ul class="reviews__list">
                         <li class="reviews__item comment">
+                            {% if request.user == i.name %}
                             <button class="update">
+                                <a href="/comment/{{i.id}}/update">
                                 <?xml version="1.0" encoding="iso-8859-1"?>
                                 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                     viewBox="0 0 32 32" style="enable-background:new 0 0 32 32;" xml:space="preserve">
@@ -222,9 +223,10 @@
                                 <g>
                                 </g>
                                 </svg>
-
+                                </a>
                             </button>
                             <button class="delete">
+                                <a href="/comment/{{i.id}}/delete">
                                 <?xml version="1.0" encoding="iso-8859-1"?>
                                 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
                                     viewBox="0 0 443 443" style="enable-background:new 0 0 443 443;" xml:space="preserve">
@@ -267,8 +269,9 @@
                                 <g>
                                 </g>
                                 </svg>
-
+                                </a>
                             </button>
+                            {% endif %}
                             <div class="comment__info">
                                 <h4 class="comment__name">{{i.name}}</h4>
                                 <div class="comment__date">{{i.created_date}}</div>

@@ -1,8 +1,7 @@
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import render, get_object_or_404, redirect, reverse
 from . import models, forms
 from django.views import generic
-import numpy as np
-from .forms import CommentForm, Apply_For_JobForm, Apply_For_CourseForm
+from .forms import CommentForm, Aplly_For_JobForm, Aplly_For_CourseForm
 
 def error_404(request, exception):
     return render(request, '404.html')
@@ -45,21 +44,17 @@ class InstructorUpdateView(generic.UpdateView):
 
 
     def get_object(self, **kwargs):
-        course_id = self.kwargs.get('id')
-        return get_object_or_404(models.Instructor, id=course_id)
+        instructor_id = self.kwargs.get('id')
+        return get_object_or_404(models.Instructor, id=instructor_id)
 
 
 class InstructorDeleteView(generic.DeleteView):
     template_name = 'models_delete.html'
-    form_class = forms.InstructorForm
-    queryset = models.Instructor.objects.all()
-    success_url = 'http://127.0.0.1:8000'
-    slug_field = 'product_slug'
-    slug_url_kwarg = 'product_slug'
+    success_url = 'http://127.0.0.1:8000/'
 
-    def form_valid(self, form):
-        print(form.cleaned_data)
-        return super(InstructorDeleteView, self).form_valid(form=form)
+    def get_object(self, **kwargs):
+        instructor_id = self.kwargs.get('id')
+        return get_object_or_404(models.Instructor, id=instructor_id)
 
 
 class BlogCreateView(generic.CreateView):
@@ -95,14 +90,6 @@ class BlogDeleteView(generic.DeleteView):
         return get_object_or_404(models.Blog, id=blog_id)
 
 
-class CommentView(generic.ListView):
-    template_name = 'instructors_info.html'
-    queryset = models.Comment.objects.all()
-
-    def get_queryset(self):
-        return models.Comment.objects.all()
-
-
 class FAQView(generic.ListView):
     template_name = 'faqs.html'
     queryset = models.Frequently_Asked_Questions.objects.all()
@@ -121,13 +108,13 @@ class CoursesView(generic.ListView):
 
 def instructor_view(request):
     if request.method == 'POST':
-        form = Apply_For_JobForm(request.POST)
+        form = Aplly_For_JobForm(request.POST)
         if form.is_valid():
             form.save()
-            redirect('application_success/')
+            return redirect('http://127.0.0.1:8000/application_success/')
 
     instructor = models.Instructor.objects.all()
-    job_applying_form = Apply_For_JobForm()
+    job_applying_form = Aplly_For_JobForm()
     context = {
         'instructor': instructor,
         'job_applying_form': job_applying_form,
@@ -137,17 +124,13 @@ def instructor_view(request):
 
 
 def contacts_view(request):
-    if request.method == 'POST':
-        form = Apply_For_JobForm(request.POST)
-        if form.is_valid():
-            form.save()
+    return render(request, 'contacts.html')
 
-    job_applying_form = Apply_For_JobForm()
-    return render(request, 'contacts.html', {'job_applying_form': job_applying_form,})
 
 def instructor_detail(request, id):
     instructor = models.Instructor.objects.get(id=id)
     return render(request, 'instructors_info.html', {'instructor': instructor})
+
 
 class InstructorDetailView(generic.DetailView):
     template_name = 'instructors_info.html'
@@ -156,30 +139,64 @@ class InstructorDetailView(generic.DetailView):
         instructor_id = self.kwargs.get('id')
         return get_object_or_404(models.Instructor, id=instructor_id)
 
+
 def about_us_view(request):
+    success = False
     if request.method == 'POST':
         form = CommentForm(request.POST)
-        if form.is_valid():
-            form.save()
-            redirect('application_success/')
 
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.name = request.user
+            form.save()
+            success = True
     comment = models.Comment.objects.all()
     comment_form = CommentForm()
     context = {
         'comment': comment,
         'comment_form': comment_form,
+        'success': success,
     }
     return render(request, 'about_us.html', context)
 
 
+def comment_update(request, id):
+    get_comment = models.Comment.objects.get(id=id)
+    success_update = False
+    if request.method == 'POST':
+        form = CommentForm(request.POST, instance=get_comment)
+        if form.is_valid():
+            form = form.save(commit=False)
+            form.name = request.user
+            form.save()
+            success_update = True
+
+    context = {
+        'get_comment': get_comment,
+        'update_comment': True,
+        'form': CommentForm(instance=get_comment),
+        'success_update': success_update,
+    }
+    return render(request, 'comments_update.html', context)
+
+
+def comment_delete(request, id):
+    get_comment = models.Comment.objects.get(id=id)
+    form = CommentForm(request)
+    form.name = None
+    get_comment.delete()
+    return (redirect(reverse('about_us')))
+
+
 def course_detail(request, id):
     if request.method == 'POST':
-        form = Apply_For_CourseForm(request.POST)
+        form = Aplly_For_CourseForm(request.POST)
         if form.is_valid():
             form.save()
+            return redirect('http://127.0.0.1:8000/application_success/')
 
     course = models.Course.objects.get(id=id)
-    course_applying_form = Apply_For_CourseForm()
+    course_applying_form = Aplly_For_CourseForm()
     context = {
         'course': course,
         'course_applying_form': course_applying_form,
@@ -193,6 +210,7 @@ class BlogsView(generic.ListView):
 
     def get_queryset(self):
         return models.Blog.objects.all()
+
 
 class BlogsDetailView(generic.DetailView):
     template_name = 'blog_info.html'
@@ -225,12 +243,10 @@ def traffic_rules_view(request):
     }
     return render(request, 'traffic_laws.html', context)
 
+
 class Traffic_RulesDetailView(generic.DetailView):
     template_name = 'traffic_laws_info.html'
 
     def get_object(self, **kwargs):
         traffic_rule_id = self.kwargs.get('id')
         return get_object_or_404(models.Traffic_Rule, id=traffic_rule_id)
-
-
-

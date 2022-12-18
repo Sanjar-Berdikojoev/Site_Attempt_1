@@ -1,0 +1,48 @@
+<!--<!DOCTYPE html>-->
+<!--{% load static %}-->
+<!--<html lang="en">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic" rel="stylesheet" />-->
+<!--    <link rel="stylesheet" href="{% static 'css/crud.css' %}">-->
+<!--    <title>Add Model</title>-->
+<!--</head>-->
+<!--<body>-->
+<!--<div class="form" id="form">-->
+<!--        <form action="" method="post" enctype="multipart/form-data">-->
+<!--            <h1 class="model_create_title">Add Model</h1>-->
+<!--                {% csrf_token %}-->
+<!--                {{form.as_p}}-->
+<!--            <input class="submit"  type="submit" value="add">-->
+<!--        </form>-->
+<!--</div>-->
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100italic,200,200italic,300,300italic,regular,italic,500,500italic,600,600italic,700,700italic,800,800italic,900,900italic" rel="stylesheet" />
+    <link rel="stylesheet" href="{% static 'css/reset.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <title>First Class Driving School</title>
+</head>
+<body>
+    <div class="models__wrapper">
+        <div class="models__content">
+            <h1 class="models__title">Create Model</h1>
+            <form method="POST" action="" class="models__form">
+                {% csrf_token %}
+                {{form.as_p}}
+                <input type="text" name="name" placeholder="Name">
+                <textarea name="description" cols="30" rows="10" placeholder="Comment"></textarea>
+                <button type="submit">ADD</button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

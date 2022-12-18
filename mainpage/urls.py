@@ -21,4 +21,6 @@ urlpatterns = [
     path('traffic_laws/<int:id>/traffic_laws_info', views.Traffic_RulesDetailView.as_view(), name='traffic_laws_info'),
     path('frequently_asked_questions/', views.FAQView.as_view(), name='frequently_asked_questions'),
     path('application_success/', views.application_success, name='application_success'),
+    path('comment/<int:id>/update', views.comment_update, name='comment_update'),
+    path('comment/<int:id>/delete', views.comment_delete, name='about_us'),
 ]

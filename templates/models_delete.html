@@ -1,25 +1,3 @@
-<!--<!DOCTYPE html>-->
-<!--{% load static %}-->
-<!--<html lang="en">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
-<!--    <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
-<!--    <title>Delete Model</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<div class="form" id="form">-->
-<!--    <div class="models__wrapper">-->
-<!--        <form action="" method="post" class="models__form" enctype="multipart/form-data">-->
-<!--            <h1 class="model_delete_title">Are you sure you want to delete this model ?</h1>-->
-<!--            {% csrf_token %}-->
-<!--            <input type="submit" value="delete">-->
-<!--        </form>-->
-<!--        </div>-->
-<!--</div>-->
-<!--</body>-->
-<!--</html>-->
-
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
@@ -32,10 +10,9 @@
 </head>
 <body>
     <div class="models__wrapper">
-        <form action="" class="models__form">
+        <form action="" method="post" class="models__form" enctype="multipart/form-data">
             <h1 class="models__title">Are sure that you want to delete this model?</h1>
             {% csrf_token %}
-            <button>Delete</button>
             <input type="submit" value="delete">
         </form>
     </div>

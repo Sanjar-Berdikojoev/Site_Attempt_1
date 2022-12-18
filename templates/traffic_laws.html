@@ -199,11 +199,11 @@
                                             {% for i in prohibition_sign %}
                                             <div class="traffics__signs-type__item">
                                                 <div class="traffics__signs-type__item-img-wrapper">
-                                                    <img src="../images/image-removebg-preview (1).png" alt="" class="traffics__signs-type__item-img">
+                                                    <img src="{{i.image.url}}" alt="" class="traffics__signs-type__item-img">
                                                 </div>
-                                                <h4 class="traffics__signs-type__item-title">Sign 3.1 "No Entry"</h4>
+                                                <h4 class="traffics__signs-type__item-title">{{i.title}}</h4>
                                                 <p class="traffics__signs-type__item-text">
-                                                    set on sections of roads or carriageways with one-way traffic to prohibit the movement of vehicles in the opposite direction.
+                                                    {{i.description}}
                                                 </p>
                                             </div>
                                             {% endfor %}
@@ -220,12 +220,11 @@
                                             {% for i in mandatory_sign %}
                                             <div class="traffics__signs-type__item">
                                                 <div class="traffics__signs-type__item-img-wrapper">
-                                                    <img src="../images/image-removebg-preview (2).png" alt="" class="traffics__signs-type__item-img">
+                                                    <img src="{{i.image.url}}" alt="" class="traffics__signs-type__item-img">
                                                 </div>
-                                                <h4 class="traffics__signs-type__item-title">Signs 4.1.1 "Go straight", 4.1.2 "Go right", 4.1.3 "Go left", 4.1.4 "Go straight or right", 4.1.5 "Go straight or go left", 4.1.6 "Move right or left"</h4>
+                                                <h4 class="traffics__signs-type__item-title">{{i.title}}</h4>
                                                 <p class="traffics__signs-type__item-text">
-                                                    are used to permit traffic at the nearest intersection of carriageways in the directions indicated by the arrows on the sign, and signs 4.1.3, 4.1.5, 4.1.6 are also used to permit a U-turn. 
-                                                    Signs 4.1.1-4.1.6 do not apply to route transport
+                                                    {{i.description}}
                                                 </p>
                                             </div>
                                             {% endfor %}
@@ -242,11 +241,11 @@
                                             {% for i in sign_of_special_regulations %}
                                             <div class="traffics__signs-type__item">
                                                 <div class="traffics__signs-type__item-img-wrapper">
-                                                    <img src="../images/RU_road_sign_5.1.svg" alt="" class="traffics__signs-type__item-img">
+                                                    <img src="{{i.image.url}}" alt="" class="traffics__signs-type__item-img">
                                                 </div>
-                                                <h4 class="traffics__signs-type__item-title">Sign 5.1 "Motorway"</h4>
+                                                <h4 class="traffics__signs-type__item-title">{{i.title}}</h4>
                                                 <p class="traffics__signs-type__item-text">
-                                                    used to designate roads on which the requirements of the Rules of the Road apply, establishing the procedure for driving on motorways.
+                                                    {{i.description}}
                                                 </p>
                                             </div>
                                             {% endfor %}
@@ -263,12 +262,11 @@
                                             {% for i in information_sign %}
                                             <div class="traffics__signs-type__item">
                                                 <div class="traffics__signs-type__item-img-wrapper">
-                                                    <img src="../images/RU_road_sign_6.1.svg.png" alt="" class="traffics__signs-type__item-img">
+                                                    <img src="{{i.image.url}}" alt="" class="traffics__signs-type__item-img">
                                                 </div>
-                                                <h4 class="traffics__signs-type__item-title">Sign 6.1 "General maximum speed limits"</h4>
+                                                <h4 class="traffics__signs-type__item-title">{{i.title}}</h4>
                                                 <p class="traffics__signs-type__item-text">
-                                                    are used to inform vehicle drivers about the general speed limits established by the Rules of the Road on the roads of the Kyrgyz Republic.
-                                                </p>
+{{i.description}}                                                </p>
                                             </div>
                                             {% endfor %}
                                         </div>
@@ -284,11 +282,11 @@
                                             {% for i in service_mark %}
                                             <div class="traffics__signs-type__item">
                                                 <div class="traffics__signs-type__item-img-wrapper">
-                                                    <img src="../images/7_1_punkt_meditsinskoj_pomoshhi-200x300.png.crdownload" alt="" class="traffics__signs-type__item-img">
+                                                    <img src="{{i.image.url}}" alt="" class="traffics__signs-type__item-img">
                                                 </div>
-                                                <h4 class="traffics__signs-type__item-title">Signs 7.1 "First aid station"</h4>
+                                                <h4 class="traffics__signs-type__item-title">{{i.title}}</h4>
                                                 <p class="traffics__signs-type__item-text">
-                                                    
+                                                    {{i.description}}
                                                 </p>
                                             </div>
                                             {% endfor %}
@@ -305,12 +303,11 @@
                                             {% for i in sign_of_additional_information %}
                                             <div class="traffics__signs-type__item">
                                                 <div class="traffics__signs-type__item-img-wrapper">
-                                                    <img src="../images/sign-8-1-1-150.svg">
+                                                    <img class="traffics__signs-type__item-img" src="{{i.image.url}}">
                                                 </div>
-                                                <h4 class="traffics__signs-type__item-title">SPlate 8.1.1 "Object distance"</h4>
+                                                <h4 class="traffics__signs-type__item-title">{{i.title}}</h4>
                                                 <p class="traffics__signs-type__item-text">
-                                                    used with warning signs if the distance from the sign to the beginning of the dangerous section is less or more than the distances specified in paragraphs 5.2.2, 5.2.3 of GOST R 52289-2004, as well as with preliminary signs of other groups, with the exception of signs 5.15.1, 5.15 .2, 6.9.3, 6.15.1-6.15.3, 6.17, 7.1-7.18.
-                                                </p>
+{{i.description}}                                             {{i.description}}   </p>
                                             </div>
                                             {% endfor %}
                                         </div>
